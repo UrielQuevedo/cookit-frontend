@@ -1,0 +1,21 @@
+.sectionRecipe {
+  background-color: #fff;
+  padding: 20px;
+  margin: 5px 0 5px 0 !important;
+}
+
+.sectionRecipe input {
+  background: #fcfcfb;
+}
+
+.sectionRecipe .MuiInputBase-multiline {
+  background: #fcfcfb;
+}
+
+.sectionRecipe #titulo {
+  font-size: 25px;
+}
+
+.sectionRecipe .m5 {
+  margin: 5px 0 5px 0;
+}
