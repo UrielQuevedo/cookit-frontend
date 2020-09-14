@@ -11,14 +11,15 @@ const IngredientInput = ({ ingredients, changeField }) => {
       alignItems="center"
       direction="row"
       spacing={3}
+      style={{ marginBottom: '1px' }}
     >
       <Grid item xs={4}>
         <AbstractInput onChange={changeField(i)} type="text" placeholder="200g/ml" name="quantity_weight" />
       </Grid>
-      <Grid item xs={7}>
+      <Grid item xs={6} md={7}>
         <AbstractInput onChange={changeField(i)} type="text" placeholder="Ingrediente" name="name" />
       </Grid>
-      <Grid item xs={1}>
+      <Grid item xs={2} md={1}>
         <IconButton>
           <CloseIcon />
         </IconButton>
