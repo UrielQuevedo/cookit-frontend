@@ -15,7 +15,7 @@ import LayoutSection from '../../components/NewRecipe/LayoutSection';
 const New = () => {
   const [recipe, setRecipe] = useState({});
   const { push } = useHistory();
-  const [ingredients, setIngredients] = useState([{}]);
+  const [ingredients, setIngredients] = useState([{ name: undefined, quantity_weight: undefined }]);
 
   const changeField = (event) => {
     const { value, name } = event.target;
