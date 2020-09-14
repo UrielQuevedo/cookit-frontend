@@ -9,28 +9,16 @@ const IngredientInputs = ({ ingredients, setIngredients }) => {
   const handleNewIngredient = () => {
     setIngredients((prevIngredients) => [
       ...prevIngredients,
-      { cantidad: '', nombre: '' },
+      { quantity_weight: undefined, name: undefined },
     ]);
-  };
-
-  const handleIngredientField = (i) => (event) => {
-    const { value, name } = event.target;
-    const ingredient = ingredients[i];
-    ingredient[name] = value;
-    setIngredients((ingredients) =>
-      ingredients.map((ing, idx) => {
-        if (idx === i) return ingredient;
-        return ing;
-      })
-    );
   };
 
   return (
     <LayoutSection>
       <h2>Ingredientes</h2>
       <IngredientInput
-        changeField={handleIngredientField}
         ingredients={ingredients}
+        setIngredients={setIngredients}
       />
       <IconButton onClick={handleNewIngredient}>
         <AddIcon />
