@@ -1,0 +1,30 @@
+.navbar-color {
+  background: #fff !important;
+}
+
+.layout-display {
+  width: 100%;
+  display: flex;
+}
+
+.navbar-item {
+  margin-right: 20px;
+  text-transform: uppercase;
+  cursor: pointer;
+  font-family: "Segoe UI";
+  padding: 20px;
+  font-weight: 600;
+  text-decoration: none;
+  color: #000;
+  transition: .5s;
+}
+
+.navbar-item:hover {
+  background: #f3f3f3;
+}
+
+.navbar-item-selected {
+  background: #f3f3f3;
+  transition: 0s;
+  border-bottom: 3px solid #FD5252;
+}
