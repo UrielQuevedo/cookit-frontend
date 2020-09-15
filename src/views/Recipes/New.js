@@ -11,11 +11,13 @@ import ImageInput from '../../components/NewRecipe/ImageInput';
 import RecipeInputs from '../../components/NewRecipe/RecipeInputs';
 import IngredientInputs from '../../components/NewRecipe/IngredientInputs';
 import LayoutSection from '../../components/NewRecipe/LayoutSection';
+import StepsRecipe from '../../components/NewRecipe/StepsRecipe';
 
 const New = () => {
   const [recipe, setRecipe] = useState({});
   const { push } = useHistory();
   const [ingredients, setIngredients] = useState([{ name: undefined, quantity_weight: undefined }]);
+  const [stepsRecipes, setStepsRecipes] = useState([{ description: undefined }]);
 
   const changeField = (event) => {
     const { value, name } = event.target;
@@ -24,12 +26,13 @@ const New = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    postNewRecipe({ ...recipe, ingredients: ingredients }).then(() =>
-      push('/')
-    );
-    setIngredients([{}]);
-    setRecipe({});
-    event.target.reset();
+    postNewRecipe({ ...recipe, ingredients: ingredients, steps: stepsRecipes })
+      .then(() => {
+        setIngredients([{}]);
+        setRecipe({});
+        push('/');
+      });
+      event.target.reset();
   };
 
   return (
@@ -39,6 +42,7 @@ const New = () => {
           <ImageInput recipe={recipe} changeField={changeField} />
           <RecipeInputs changeField={changeField} />
           <IngredientInputs ingredients={ingredients} setIngredients={setIngredients} />
+          <StepsRecipe stepsRecipes={stepsRecipes} setStepsRecipes={setStepsRecipes} />
           <LayoutSection>
             <Button
               type="submit"
