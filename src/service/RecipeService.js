@@ -9,3 +9,7 @@ export const getAllRecipes = () => {
 export const postNewRecipe = (recipe) => {
   return API.post(URL_BASE + '/new', recipe);
 }
+
+export const getRecipesByQuery = (query) => {
+  return API.get(URL_BASE + `/search?query=${query}`);
+};

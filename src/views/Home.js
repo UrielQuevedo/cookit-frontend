@@ -14,6 +14,7 @@ import InfoIcon from '@material-ui/icons/Info';
 import AddIcon from '@material-ui/icons/Add';
 import { useHistory } from 'react-router-dom';
 import { ChefHutSpinner, CookieSpiner } from '../components/Spinner';
+import Searcher from '../components/Searcher/Searcher';
 import CardRecipe from '../components/CardRecipe/CardRecipe';
 
 const useStyles = makeStyles(() => ({
@@ -55,6 +56,9 @@ const Home = () => {
     <Container className={classes.root}>
       <Grid justify="center" direction="column" >
         <Grid item style={{ margin: '10px' }}><img src="/banner.png" alt="banner de la pagina"/></Grid>
+        <Grid item container justify="center" style={{ margin: '10px' }}>
+        <Searcher fromHome={true}/>
+        </Grid>
         <Grid item container justify="center" style={{ margin: '10px' }}>
           <Button
             variant="outlined"
