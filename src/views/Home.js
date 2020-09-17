@@ -15,6 +15,7 @@ import AddIcon from '@material-ui/icons/Add';
 import { useHistory } from 'react-router-dom';
 import { ChefHutSpinner, CookieSpiner } from '../components/Spinner';
 import Searcher from '../components/Searcher/Searcher';
+import CardRecipe from '../components/CardRecipe/CardRecipe';
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -62,6 +63,7 @@ const Home = () => {
           <Button
             variant="outlined"
             color="primary"
+            size="large"
             className={classes.button}
             startIcon={<AddIcon />}
             onClick={handleNewRecipe}
@@ -71,21 +73,13 @@ const Home = () => {
         </Grid>
       </Grid>
       { loading }
-      <GridList cellHeight={180} className={classes.gridList}>
-        {recipes.map(({ imageUrl, name }, i) => (
-          <GridListTile key={i}>
-            <img src={imageUrl} alt={name} />
-            <GridListTileBar
-              title={name}
-              actionIcon={
-                <IconButton aria-label={name} className={classes.icon}>
-                  <InfoIcon />
-                </IconButton>
-              }
-            />
-          </GridListTile>
+      <Grid container justify="center" spacing={3}>
+        {recipes.map((recipe, i) => (
+          <Grid item key={i} xs={12} sm={3} style={{marginBottom:'20px'}}>
+            <CardRecipe {...recipe} />
+          </Grid>
         ))}
-      </GridList>
+      </Grid>
     </Container>
   );
 };
