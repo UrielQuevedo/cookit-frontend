@@ -13,3 +13,7 @@ export const postNewRecipe = (recipe) => {
 export const getRecipesByQuery = (query) => {
   return API.get(URL_BASE + `/search?query=${query}`);
 };
+
+export const getRecipe = (id) => {
+  return API.get(URL_BASE + `/${id}`);
+}
