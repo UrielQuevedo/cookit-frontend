@@ -1,0 +1,22 @@
+.cardRecipe {
+  transition: .3s !important;
+}
+
+.cardRecipe:hover {
+  transform: scale(1.02);
+}
+
+.cardRecipe .cardRecipe-image {
+  margin-left: -25%;
+  display: block;
+  width: 130px;
+  padding: 150px;
+}
+
+.cardRecipe .cardRecipe-image:hover {
+  cursor: pointer;
+}
+
+.cardRecipe .cardRecipe-avatar {
+  background-color: red;
+}
