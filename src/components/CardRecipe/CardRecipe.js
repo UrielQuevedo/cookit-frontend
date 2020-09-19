@@ -1,5 +1,4 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
 import CardMedia from '@material-ui/core/CardMedia';
@@ -8,29 +7,22 @@ import CardActions from '@material-ui/core/CardActions';
 import Avatar from '@material-ui/core/Avatar';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
-import { red } from '@material-ui/core/colors';
 import FavoriteIcon from '@material-ui/icons/Favorite';
+import './CardRecipe.css';
+import { useHistory } from 'react-router-dom';
 
-const useStyles = makeStyles(() => ({
+const CardRecipe = ({ imageUrl, description, name, id }) => {
+  const { push } = useHistory();
 
-  media: {
-    marginLeft: '-25%',
-    display: 'block',
-    width: '130px',
-    padding: '150px',
-  },
-  avatar: {
-    backgroundColor: red[500],
-  },
-}));
+  const goToRecipe = () => {
+    push(`/recipes/${id}`);
+  }
 
-const CardRecipe = ({ imageUrl, description, name }) => {
-  const classes = useStyles();
   return (
-    <Card className={classes.root}>
+    <Card className="cardRecipe">
       <CardHeader
         avatar={
-          <Avatar aria-label="recipe" className={classes.avatar}>
+          <Avatar aria-label="recipe" className="cardRecipe-avatar">
             U
           </Avatar>
         }
@@ -38,9 +30,10 @@ const CardRecipe = ({ imageUrl, description, name }) => {
         subheader="September 11, 1997"
       />
       <CardMedia
-        className={classes.media}
+        className="cardRecipe-image"
         image={imageUrl}
-        title="Paella dish"
+        title={name}
+        onClick={goToRecipe}
       />
       <CardContent>
         <Typography variant="h6" style={{ padding:'10px 0 10px 0'}}>
