@@ -1,10 +1,11 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Home from '../views/Home';
-import New from '../views/Recipes/New';
+import New from '../views/Recipes/New/New';
 import NavbarTop from './Header/NavbarTop';
 import Search from '../views/Search/Search';
 import Login from '../views/Login/Login';
+import Recipe from '../views/Recipes/Recipe';
 
 const App = () => {
   return (
@@ -15,6 +16,7 @@ const App = () => {
         <Route exact path="/" component={Home} />
         <Route exact path="/recipes/new" component={New} />
         <Route exact path="/search" component={Search} />
+        <Route exact path="/recipes/:id" component={Recipe} />
       </Switch>
     </Router>
   );

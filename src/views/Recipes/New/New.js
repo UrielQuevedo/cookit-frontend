@@ -5,13 +5,13 @@ import {
   Button,
 } from '@material-ui/core';
 import './New.css';
-import { postNewRecipe } from '../../service/RecipeService';
+import { postNewRecipe } from '../../../service/RecipeService';
 import { useHistory } from 'react-router-dom';
-import ImageInput from '../../components/NewRecipe/ImageInput';
-import RecipeInputs from '../../components/NewRecipe/RecipeInputs';
-import IngredientInputs from '../../components/NewRecipe/IngredientInputs';
-import LayoutSection from '../../components/NewRecipe/LayoutSection';
-import StepsRecipe from '../../components/NewRecipe/StepsRecipe';
+import ImageInput from '../../../components/NewRecipe/ImageInput';
+import RecipeInputs from '../../../components/NewRecipe/RecipeInputs';
+import IngredientInputs from '../../../components/NewRecipe/IngredientInputs';
+import LayoutSection from '../../../components/NewRecipe/LayoutSection';
+import StepsRecipe from '../../../components/NewRecipe/StepsRecipe';
 
 const New = () => {
   const [recipe, setRecipe] = useState({});
