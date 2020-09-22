@@ -9,6 +9,7 @@ import {
   Container,
   Button,
   Grid,
+  Paper, Tabs, Tab, Grow
 } from '@material-ui/core';
 import InfoIcon from '@material-ui/icons/Info';
 import AddIcon from '@material-ui/icons/Add';
@@ -50,16 +51,16 @@ const Home = () => {
 
   const handleNewRecipe = () => {
     push('/recipes/new');
-  }
+  };
 
   return (
     <Container className={classes.root}>
-      <Grid justify="center" direction="column" >
-        <Grid item style={{ margin: '10px' }}><img src="/banner.png" alt="banner de la pagina"/></Grid>
-        <Grid item container justify="center" style={{ margin: '10px' }}>
-        <Searcher fromHome={true}/>
+      <Grid justify="center" direction="column">
+        <p style={{ fontSize:'45px', margin:'4rem 0 4rem 0', textAlign:'center', fontFamily: 'Segoe UI semibold', color:'#4a4a4a'}}>¿Que vas a cocinar hoy?</p>
+        <Grid item xs={12} justify="center" style={{ margin: '20px 0 20px 0' }}>
+          <Searcher fromHome={true} />
         </Grid>
-        <Grid item container justify="center" style={{ margin: '10px' }}>
+        <Grid item container justify="center" style={{ margin: '20px 0 20px 0' }}>
           <Button
             variant="outlined"
             color="primary"
@@ -68,16 +69,31 @@ const Home = () => {
             startIcon={<AddIcon />}
             onClick={handleNewRecipe}
           >
-        publicar receta
-        </Button>
+            publicar receta
+          </Button>
         </Grid>
       </Grid>
-      { loading }
+      <Grid container style={{ margin:'20px 0 20px 0' }}>
+        <Paper square>
+          <Tabs
+            value={0}
+            indicatorColor="primary"
+            textColor="primary"
+            onChange={() => undefined}
+            aria-label="disabled tabs example"
+          >
+            <Tab label="utimas" />
+            <Tab label="seguidores" disabled />
+          </Tabs>
+        </Paper>
+      </Grid>
       <Grid container justify="center" spacing={3}>
         {recipes.map((recipe, i) => (
-          <Grid item key={i} xs={12} sm={3} style={{marginBottom:'20px'}}>
-            <CardRecipe {...recipe} />
-          </Grid>
+          <Grow in={true} key={i} {...{ timeout: 1000 + i * 400 }}>
+            <Grid item xs={12} sm={3} style={{ marginBottom: '20px' }}>
+              <CardRecipe {...recipe} />
+            </Grid>
+          </Grow>
         ))}
       </Grid>
     </Container>

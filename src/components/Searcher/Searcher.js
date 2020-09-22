@@ -23,7 +23,7 @@ const Searcher = ( { fromHome, setRecipes }) => {
     }
 
     return (
-       <div>
+       <>
         <SearchBar 
           autoFocus={!fromHome}
           placeholder="Buscar receta..."
@@ -31,7 +31,7 @@ const Searcher = ( { fromHome, setRecipes }) => {
           onChange={newValue => setQuery(newValue)}
           onRequestSearch={fetchQuery}
          /> 
-       </div>
+       </>
     )
 
 }
