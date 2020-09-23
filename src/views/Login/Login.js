@@ -4,8 +4,8 @@ import VisibilityIcon from '@material-ui/icons/Visibility';
 import VisibilityOffIcon from "@material-ui/icons/VisibilityOff";
 import { Alert } from '@material-ui/lab';
 import { Link } from 'react-router-dom';
-import AuthGoogleLogin from '../../utils/AuthGoogleLogin';
-
+import AuthGoogleLogin from './AuthGoogleLogin';
+import '../Login/Login.css';
 const Login = () => {
 
   //TODO el remember funcione
