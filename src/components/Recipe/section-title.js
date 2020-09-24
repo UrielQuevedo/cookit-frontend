@@ -1,5 +1,6 @@
 import { Grid, Typography } from '@material-ui/core';
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const SectionTitle = ({ title }) => (
   <Grid item xs={12}>
@@ -8,5 +9,9 @@ const SectionTitle = ({ title }) => (
     </Typography>
   </Grid>
 );
+
+SectionTitle.propTypes = {
+  title: PropTypes.string.isRequired
+};
 
 export default SectionTitle;

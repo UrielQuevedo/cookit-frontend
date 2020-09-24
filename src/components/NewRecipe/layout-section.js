@@ -1,7 +1,8 @@
 import { Grid } from '@material-ui/core';
 import React from 'react';
+import PropTypes from 'prop-types';
 
-const LayoutSection = ({ children, classStyle = 'sectionRecipe' }) => (
+const LayoutSection = ({ children, classStyle }) => (
   <Grid
     container
     item
@@ -15,5 +16,14 @@ const LayoutSection = ({ children, classStyle = 'sectionRecipe' }) => (
     {children}
   </Grid>
 );
+
+LayoutSection.defaultProps = {
+  classStyle: 'sectionRecipe'
+};
+
+LayoutSection.propTypes = {
+  children: PropTypes.node.isRequired,
+  classStyle: PropTypes.string
+};
 
 export default LayoutSection;

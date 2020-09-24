@@ -1,10 +1,11 @@
 import { Grid, Typography } from '@material-ui/core';
 import React from 'react';
 import SectionTitle from './section-title';
+import PropTypes from 'prop-types';
 
 const TITLE = 'Pasos';
 
-const StepList = ({ steps = [] }) => (
+const StepList = ({ steps }) => (
   <Grid item container xs={12} className="plr-20">
     <SectionTitle title={TITLE} />
     <Grid item xs={12} container direction="column" className="mtb-10">
@@ -23,5 +24,13 @@ const StepList = ({ steps = [] }) => (
     </Grid>
   </Grid>
 );
+
+StepList.defaultProps = {
+  steps: []
+};
+
+StepList.propTypes = {
+  steps: PropTypes.array
+};
 
 export default StepList;

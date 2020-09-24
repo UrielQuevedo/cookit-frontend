@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom';
 
 const PLACEHOLDER = 'Buscar receta...';
 
-const Searcher = ({ setRecipes }) => {
+const Searcher = () => {
   const [query, setQuery] = useState('');
   const { push } = useHistory();
 

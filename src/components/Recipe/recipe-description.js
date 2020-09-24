@@ -1,5 +1,6 @@
 import { Grid, Typography } from '@material-ui/core';
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const RecipeDescription = ({ imageUrl, name, description }) => (
   <>
@@ -21,5 +22,11 @@ const RecipeDescription = ({ imageUrl, name, description }) => (
     </Grid>
   </>
 );
+
+RecipeDescription.propTypes = {
+  description: PropTypes.string.isRequired,
+  imageUrl: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired
+};
 
 export default RecipeDescription;

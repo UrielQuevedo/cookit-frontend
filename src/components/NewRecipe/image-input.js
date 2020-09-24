@@ -3,6 +3,7 @@ import React from 'react';
 import { IMAGE_DEFAULT_RECIPE } from '../../utils/constants';
 import AbstractInput from '../abstract-input';
 import LayoutSection from './layout-section';
+import PropTypes from 'prop-types';
 
 const ImageInput = ({ recipe, changeField }) => (
   <LayoutSection>
@@ -26,5 +27,10 @@ const ImageInput = ({ recipe, changeField }) => (
     </Grid>
   </LayoutSection>
 );
+
+ImageInput.propTypes = {
+  changeField: PropTypes.func.isRequired,
+  recipe: PropTypes.object.isRequired
+};
 
 export default ImageInput;

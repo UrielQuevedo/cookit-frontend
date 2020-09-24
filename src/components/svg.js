@@ -6,7 +6,7 @@ const Svg = ({ xlink, ...rest }) => (
     <use xlinkHref={xlink} />
   </svg>
 );
-Svg.prototype = {
+Svg.propTypes = {
   xlink: PropTypes.string.isRequired
 };
 

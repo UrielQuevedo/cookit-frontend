@@ -1,5 +1,6 @@
 import React from 'react';
 import { TextField } from '@material-ui/core';
+import PropTypes from 'prop-types';
 
 const AbstractInput = ({ type, name, placeholder, ...rest }) => (
   <TextField
@@ -14,4 +15,11 @@ const AbstractInput = ({ type, name, placeholder, ...rest }) => (
     {...rest}
   />
 );
+
+AbstractInput.propTypes = {
+  name: PropTypes.string.isRequired,
+  placeholder: PropTypes.string.isRequired,
+  type: PropTypes.string.isRequired
+};
+
 export default AbstractInput;

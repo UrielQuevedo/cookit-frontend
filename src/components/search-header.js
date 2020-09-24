@@ -1,6 +1,6 @@
 import { Grid } from '@material-ui/core';
 import React from 'react';
-import Searcher from './Searcher/Searcher';
+import Searcher from './Searcher/searcher';
 
 const TITLE = '¿Que vas a cocinar hoy?';
 

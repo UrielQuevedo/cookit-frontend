@@ -5,6 +5,7 @@ import CloseIcon from '@material-ui/icons/Close';
 import LayoutSection from './layout-section';
 import { useChangeFieldOnList } from '../../hooks/useChangeFieldOnList';
 import AbstractInput from '../abstract-input';
+import PropTypes from 'prop-types';
 
 const IngredientInputs = ({ ingredients, setIngredients }) => {
   const [
@@ -56,6 +57,15 @@ const IngredientInputs = ({ ingredients, setIngredients }) => {
       </IconButton>
     </LayoutSection>
   );
+};
+
+IngredientInputs.defaultProps = {
+  ingredients: []
+};
+
+IngredientInputs.propTypes = {
+  ingredients: PropTypes.array,
+  setIngredients: PropTypes.func.isRequired
 };
 
 export default IngredientInputs;

@@ -1,5 +1,6 @@
 import { Avatar, Button, Grid, Typography } from '@material-ui/core';
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const UserInformation = ({ name, create_at }) => (
   <Grid
@@ -30,5 +31,10 @@ const UserInformation = ({ name, create_at }) => (
     </Grid>
   </Grid>
 );
+
+UserInformation.propTypes = {
+  create_at: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired
+};
 
 export default UserInformation;

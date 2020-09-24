@@ -10,6 +10,7 @@ import Typography from '@material-ui/core/Typography';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import './CardRecipe.css';
 import { useHistory } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 const CardRecipe = ({ imageUrl, description, name, id }) => {
   const { push } = useHistory();
@@ -50,6 +51,13 @@ const CardRecipe = ({ imageUrl, description, name, id }) => {
       </CardActions>
     </Card>
   );
+};
+
+CardRecipe.propTypes = {
+  description: PropTypes.string.isRequired,
+  id: PropTypes.number.isRequired,
+  imageUrl: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired
 };
 
 export default CardRecipe;

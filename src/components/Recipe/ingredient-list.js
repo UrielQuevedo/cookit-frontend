@@ -2,6 +2,7 @@ import { Divider, Grid, Typography } from '@material-ui/core';
 import React from 'react';
 import PersonIcon from '@material-ui/icons/Person';
 import SectionTitle from './section-title';
+import PropTypes from 'prop-types';
 
 const TITLE = 'Ingredientes';
 
@@ -28,6 +29,15 @@ const IngredientList = ({ comensales, ingredients = [] }) => {
       </Grid>
     </Grid>
   );
+};
+
+IngredientList.defaultProps = {
+  ingredients: []
+};
+
+IngredientList.propTypes = {
+  comensales: PropTypes.string.isRequired,
+  ingredients: PropTypes.array
 };
 
 export default IngredientList;

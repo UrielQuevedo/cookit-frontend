@@ -1,5 +1,5 @@
 import React, { useState, createContext, useEffect } from 'react';
-
+import PropTypes from 'prop-types';
 import { Redirect } from 'react-router';
 
 const AuthTypes = {
@@ -79,6 +79,10 @@ const AuthProvider = ({ children }) => {
       {handlerComponent()}
     </AuthContext.Provider>
   );
+};
+
+AuthProvider.propTypes = {
+  children: PropTypes.node.isRequired
 };
 
 export default AuthProvider;
