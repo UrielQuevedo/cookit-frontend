@@ -1,39 +1,34 @@
 import React, { useState } from 'react';
-import SearchBar from "material-ui-search-bar";
+import SearchBar from 'material-ui-search-bar';
 import { useHistory } from 'react-router-dom';
-import { getRecipesByQuery } from '../../service/RecipeService';
-import CardRecipe from '../CardRecipe/CardRecipe';
 
-const Searcher = ( { fromHome, setRecipes }) => {
+const PLACEHOLDER = "Buscar receta...";
 
-    const [query, setQuery] = useState('');
-    const { push } = useHistory();
+const Searcher = ({ setRecipes }) => {
+  const [query, setQuery] = useState('');
+  const { push } = useHistory();
 
-    const fetchQuery = () => {
-        getRecipesByQuery(query)
-        .then(response => {
-            console.log(response);
-            setRecipes(response);
-        })
-        .catch(error => console.log(error));
-    }
+  const handleSearch = () => {
+    push(`/recipes?search=${query}`);
+  };
 
-    const goToSearch = () => {
-        if (fromHome) push('/search');
-    }
+  const onHandleCancel = () => {
+    setQuery('');
+  }
 
-    return (
-       <>
-        <SearchBar 
-          autoFocus={!fromHome}
-          placeholder="Buscar receta..."
-          onClickCapture={goToSearch} 
-          onChange={newValue => setQuery(newValue)}
-          onRequestSearch={fetchQuery}
-         /> 
-       </>
-    )
+  const handleChangeQuery = (newValue) => {
+    setQuery(newValue);
+  }
 
-}
+  return (
+    <SearchBar
+      autoFocus={true}
+      placeholder={PLACEHOLDER}
+      onChange={handleChangeQuery}
+      onRequestSearch={handleSearch}
+      onCancelSearch={onHandleCancel}
+    />
+  );
+};
 
 export default Searcher;
