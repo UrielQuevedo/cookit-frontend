@@ -1,12 +1,12 @@
 import { Divider, Grid } from '@material-ui/core';
 import React, { useEffect, useState } from 'react';
-import RecipeDescription from '../../components/Recipe/recipe-description';
-import UserInformation from '../../components/Recipe/user-information';
-import Time from '../../components/Recipe/time';
-import IngredientList from '../../components/Recipe/ingredient-list';
-import StepList from '../../components/Recipe/step-list';
+import RecipeDescription from '../../components/Recipe/RecipeDescription';
+import UserInformation from '../../components/Recipe/UserInformation';
+import Time from '../../components/Recipe/Time';
+import IngredientList from '../../components/Recipe/IngredientList';
+import StepList from '../../components/Recipe/StepList';
 import { useParams } from 'react-router-dom';
-import { getRecipe } from '../../service/recipe-service';
+import { getRecipe } from '../../service/RecipeService';
 import './Recipe.css';
 
 const NOMBRE = 'Uriel Quevedo';
@@ -26,6 +26,7 @@ const Recipe = () => {
   } = recipe;
 
   useEffect(() => {
+    // eslint-disable-next-line promise/catch-or-return
     getRecipe(id).then(recipe_ => setRecipe(recipe_));
   }, [id]);
 

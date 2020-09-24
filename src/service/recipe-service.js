@@ -1,9 +1,15 @@
-import API from './http-service';
+import API from './HttpService';
 
 const URL_BASE = 'recipes';
 
-export const getAllRecipes = parameters => API.get(URL_BASE, parameters);
+export const getAllRecipes = (params) => {
+  return API.get(URL_BASE, params);
+};
 
-export const postNewRecipe = recipe => API.post(`${URL_BASE}/new`, recipe);
+export const postNewRecipe = (recipe) => {
+  return API.post(URL_BASE + '/new', recipe);
+}
 
-export const getRecipe = id => API.get(`${URL_BASE}/${id}`);
+export const getRecipe = (id) => {
+  return API.get(URL_BASE + `/${id}`);
+}
