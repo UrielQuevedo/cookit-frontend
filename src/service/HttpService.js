@@ -15,19 +15,20 @@ const AXIOS_API = axios.create({
   baseURL: baseURL + '/api',
 });
 
-const apiRequest = (method, url, data = {}) => {
+const apiRequest = (method, url, data, params) => {
   return AXIOS_API({
     method,
     url,
     data: data,
-    headers: getToken(url)
+    headers: getToken(url),
+    params: params
   })
     .then((res) => res.data)
     .catch((err) => console.log(err.response));
 };
 
-const get = (url) => apiRequest('get', url);
-const post = (url, data) => apiRequest('post', url, data);
+const get = (url, params = {}) => apiRequest('get', url, {}, params);
+const post = (url, data = {}) => apiRequest('post', url, data, {});
 
 const API = {
   get,
