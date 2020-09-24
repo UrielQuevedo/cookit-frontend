@@ -3,11 +3,13 @@ import GoogleLogin from 'react-google-login';
 import { Grid } from '@material-ui/core';
 import { loginSocial } from '../../service/AuthService';
 import { useHistory } from 'react-router-dom';
+import { AuthContext } from '../../context/AuthContext';
 
 const AuthGoogleLogin = () => {
 
     const clientId = process.env.REACT_APP_GOOGLE_CLIENT_ID;
     const { push } = useHistory();
+    const { setAuth } = useContext(AuthContext);
 
     const responseGoogle = (response) => {
         console.log(response);
@@ -23,6 +25,7 @@ const AuthGoogleLogin = () => {
         .then(response => {
             console.log(response);
             localStorage.setItem('authorization', response.token);
+            setAuth({ type:'LOG_IN', isRemember:true, id: response.id });
             push('/');
         })
     }

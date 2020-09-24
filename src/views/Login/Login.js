@@ -8,17 +8,10 @@ import AuthGoogleLogin from './AuthGoogleLogin';
 import '../Login/Login.css';
 const Login = () => {
 
-  //TODO el remember funcione
   const [ isRemember, setIsRemember ] = useState(false);
   const [ error, setError ] = useState();
   const [ loading, setLoading  ] = useState(false);
   const [ showPassword, setShowPassword ] = useState(false);
-
-  const clientId = process.env.REACT_APP_GOOGLE_CLIENT_ID;
-
-  const responseGoogle = (response) => {
-      console.log(response);
-  }
 
   return (
     <Grid container justify="center">

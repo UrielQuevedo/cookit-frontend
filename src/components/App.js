@@ -6,17 +6,22 @@ import NavbarTop from './Header/NavbarTop';
 import Search from '../views/Search/Search';
 import Login from '../views/Login/Login';
 import Recipe from '../views/Recipes/Recipe';
+import AuthProvider from '../context/AuthContext';
 
 const App = () => {
   return (
     <Router>
-      <NavbarTop />
       <Switch>
-        <Route exact path="/login" component={Login} />
-        <Route exact path="/" component={Home} />
-        <Route exact path="/recipes/new" component={New} />
-        <Route exact path="/search" component={Search} />
-        <Route exact path="/recipes/:id" component={Recipe} />
+        <AuthProvider>
+          <Route exact path="/login" component={Login} />
+          <NavbarTop />
+          <Switch>
+            <Route exact path="/" component={Home} />
+            <Route exact path="/recipes/new" component={New} />
+            <Route exact path="/search" component={Search} />
+            <Route exact path="/recipes/:id" component={Recipe} />
+          </Switch>
+        </AuthProvider>
       </Switch>
     </Router>
   );
