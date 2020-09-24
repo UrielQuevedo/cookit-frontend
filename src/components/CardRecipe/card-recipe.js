@@ -16,7 +16,7 @@ const CardRecipe = ({ imageUrl, description, name, id }) => {
 
   const goToRecipe = () => {
     push(`/recipes/${id}`);
-  }
+  };
 
   return (
     <Card className="cardRecipe">
@@ -36,7 +36,7 @@ const CardRecipe = ({ imageUrl, description, name, id }) => {
         onClick={goToRecipe}
       />
       <CardContent>
-        <Typography variant="h6" style={{ padding:'10px 0 10px 0'}}>
+        <Typography variant="h6" style={{ padding: '10px 0 10px 0' }}>
           {name}
         </Typography>
         <Typography variant="body2" color="textSecondary" component="p">
@@ -50,6 +50,6 @@ const CardRecipe = ({ imageUrl, description, name, id }) => {
       </CardActions>
     </Card>
   );
-}
+};
 
 export default CardRecipe;

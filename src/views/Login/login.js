@@ -1,17 +1,23 @@
-import React, { useContext, useState } from 'react';
-import { Box, Button, Checkbox, CircularProgress, CssBaseline, FormControlLabel, Grid, IconButton, InputAdornment, TextField, Typography } from '@material-ui/core';
+import React, { useState } from 'react';
+import {
+  Box,
+  Button,
+  Checkbox,
+  CssBaseline,
+  FormControlLabel,
+  Grid,
+  IconButton,
+  InputAdornment,
+  TextField,
+  Typography
+} from '@material-ui/core';
 import VisibilityIcon from '@material-ui/icons/Visibility';
-import VisibilityOffIcon from "@material-ui/icons/VisibilityOff";
-import { Alert } from '@material-ui/lab';
+import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
 import { Link } from 'react-router-dom';
 import AuthGoogleLogin from './AuthGoogleLogin';
 import '../Login/Login.css';
 const Login = () => {
-
-  const [ isRemember, setIsRemember ] = useState(false);
-  const [ error, setError ] = useState();
-  const [ loading, setLoading  ] = useState(false);
-  const [ showPassword, setShowPassword ] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   return (
     <Grid container justify="center">
@@ -24,12 +30,14 @@ const Login = () => {
         justify="center"
         alignItems="center"
       >
-        <Grid container direction="column" justify="center" alignItems="center" className="login-box">
-          <Typography
-            component="h2"
-            align="center"
-            variant="h3"
-          >
+        <Grid
+          container
+          direction="column"
+          justify="center"
+          alignItems="center"
+          className="login-box"
+        >
+          <Typography component="h2" align="center" variant="h3">
             Iniciar Sesión
           </Typography>
           <form>
@@ -49,7 +57,7 @@ const Login = () => {
               required
               label="Contraseña"
               name="password"
-              type={ showPassword ? 'text' : 'password' }
+              type={showPassword ? 'text' : 'password'}
               id="password"
               autoComplete="current-password"
               InputProps={{
@@ -59,7 +67,11 @@ const Login = () => {
                       onClick={() => setShowPassword(!showPassword)}
                       aria-label="toggle password visibility"
                     >
-                      {showPassword ? <VisibilityOffIcon /> : <VisibilityIcon />}
+                      {showPassword ? (
+                        <VisibilityOffIcon />
+                      ) : (
+                        <VisibilityIcon />
+                      )}
                     </IconButton>
                   </InputAdornment>
                 )
@@ -68,33 +80,30 @@ const Login = () => {
             <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
               label="Recordarme"
-              style={{ marginTop:'15px' }}
+              style={{ marginTop: '15px' }}
             />
-            { error && <Alert variant="filled" severity="error" style={{ marginTop:'15px' }}>{error}</Alert> }
-            <Box style={{ position:'relative' }}>
+            <Box style={{ position: 'relative' }}>
               <Button
                 type="submit"
                 fullWidth
                 variant="contained"
                 color="primary"
-                disabled={loading}
-                style={{ margin: '20px 0 0 0'}}
-                >
+                style={{ margin: '20px 0 0 0' }}
+              >
                 Iniciar sesión
               </Button>
-             
             </Box>
-           
+
             <Grid container justify="center" style={{ fontSize: '20px' }}>
               <p>o</p>
             </Grid>
 
             <AuthGoogleLogin />
 
-            <Grid container justify="center" style={{ marginBottom:'20px' }}>
+            <Grid container justify="center" style={{ marginBottom: '20px' }}>
               <div>
                 ¿No tienes una cuenta?
-                <Link to="/register" style={{marginLeft:'5px'}}>
+                <Link to="/register" style={{ marginLeft: '5px' }}>
                   Regístrate
                 </Link>
               </div>
@@ -104,6 +113,6 @@ const Login = () => {
       </Grid>
     </Grid>
   );
-}
+};
 
 export default Login;

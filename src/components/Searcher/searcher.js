@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import SearchBar from 'material-ui-search-bar';
 import { useHistory } from 'react-router-dom';
 
-const PLACEHOLDER = "Buscar receta...";
+const PLACEHOLDER = 'Buscar receta...';
 
 const Searcher = ({ setRecipes }) => {
   const [query, setQuery] = useState('');
@@ -14,15 +14,15 @@ const Searcher = ({ setRecipes }) => {
 
   const onHandleCancel = () => {
     setQuery('');
-  }
+  };
 
-  const handleChangeQuery = (newValue) => {
+  const handleChangeQuery = newValue => {
     setQuery(newValue);
-  }
+  };
 
   return (
     <SearchBar
-      autoFocus={true}
+      autoFocus
       placeholder={PLACEHOLDER}
       onChange={handleChangeQuery}
       onRequestSearch={handleSearch}

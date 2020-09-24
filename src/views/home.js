@@ -8,7 +8,7 @@ import {
   Paper,
   Tabs,
   Tab,
-  Grow,
+  Grow
 } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
 import { useHistory } from 'react-router-dom';
@@ -22,20 +22,21 @@ const useStyles = makeStyles(() => ({
     display: 'flex',
     flexWrap: 'wrap',
     justifyContent: 'space-around',
-    overflow: 'hidden',
+    overflow: 'hidden'
   },
   icon: {
-    color: 'rgba(255, 255, 255, 0.54)',
+    color: 'rgba(255, 255, 255, 0.54)'
   },
   title: {
-    color: 'red',
+    color: 'red'
   },
   button: {
-    margin: '10px 0 10px 0',
-  },
+    margin: '10px 0 10px 0'
+  }
 }));
 
 const BUTTON_NEW_RECIPE_NAME = 'publicar receta';
+const NUMBER_OF_TRANSITION = 100;
 
 const Home = () => {
   const classes = useStyles();
@@ -46,22 +47,22 @@ const Home = () => {
     page: 0,
     size: 10,
     totalPages: 1,
-    totalElements: '?',
+    totalElements: '?'
   });
 
   const getPaginationRecipes = async () => {
     const { page, size } = pagination;
     const { content, totalElements, totalPages } = await getAllRecipes({
       page,
-      size,
+      size
     });
-    setPagination((pagination_) => ({
+    setPagination(pagination_ => ({
       ...pagination_,
       totalPages,
       totalElements,
-      page: pagination_.page + 1,
+      page: pagination_.page + 1
     }));
-    setRecipes((recipes_) => [...recipes_, ...content]);
+    setRecipes(recipes_ => [...recipes_, ...content]);
     setLoading(false);
   };
 
@@ -115,7 +116,7 @@ const Home = () => {
         <Grid container justify="center" spacing={3}>
           {recipes.map((recipe, i) => (
             <>
-              <Grow in={true} key={i} {...{ timeout: 1000 + i * 100 }}>
+              <Grow in key={i} {...{ timeout: i * NUMBER_OF_TRANSITION }}>
                 <Grid item xs={12} sm={3} style={{ marginBottom: '20px' }}>
                   <CardRecipe {...recipe} />
                 </Grid>

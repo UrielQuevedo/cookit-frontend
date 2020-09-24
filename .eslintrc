@@ -1,0 +1,8 @@
+{
+  "extends": [
+    "@atixlabs/eslint-config/configurations/react"
+  ],
+  "rules": {
+    "camelcase": "off"
+  }
+}

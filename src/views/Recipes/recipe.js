@@ -1,7 +1,4 @@
-import {
-  Divider,
-  Grid,
-} from '@material-ui/core';
+import { Divider, Grid } from '@material-ui/core';
 import React, { useEffect, useState } from 'react';
 import RecipeDescription from '../../components/Recipe/RecipeDescription';
 import UserInformation from '../../components/Recipe/UserInformation';
@@ -18,32 +15,30 @@ const FECHA_PUBLICACION = '16 de Septiembre 16:24';
 const Recipe = () => {
   const { id } = useParams();
   const [recipe, setRecipe] = useState({});
-  const { name, description, imageUrl, comensales, ingredients, steps, time } = recipe;
+  const {
+    name,
+    description,
+    imageUrl,
+    comensales,
+    ingredients,
+    steps,
+    time
+  } = recipe;
 
   useEffect(() => {
-    getRecipe(id)
-      .then(recipe => setRecipe(recipe));
+    // eslint-disable-next-line promise/catch-or-return
+    getRecipe(id).then(recipe_ => setRecipe(recipe_));
   }, [id]);
 
   return (
     <Grid container justify="center">
-      <Grid
-        container
-        item
-        xs={12}
-        sm={6}
-        justify="center"
-        className="bg"
-      >
+      <Grid container item xs={12} sm={6} justify="center" className="bg">
         <RecipeDescription
           imageUrl={imageUrl}
           name={name}
           description={description}
         />
-        <UserInformation
-          name={NOMBRE}
-          create_at={FECHA_PUBLICACION}
-        />
+        <UserInformation name={NOMBRE} create_at={FECHA_PUBLICACION} />
         <Time time={time} />
         <IngredientList ingredients={ingredients} comensales={comensales} />
         <Grid item xs={12}>

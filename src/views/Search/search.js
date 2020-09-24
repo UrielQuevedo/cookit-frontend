@@ -12,17 +12,17 @@ const useStyles = makeStyles(() => ({
     display: 'flex',
     flexWrap: 'wrap',
     justifyContent: 'space-around',
-    overflow: 'hidden',
+    overflow: 'hidden'
   },
   icon: {
-    color: 'rgba(255, 255, 255, 0.54)',
+    color: 'rgba(255, 255, 255, 0.54)'
   },
   title: {
-    color: 'red',
+    color: 'red'
   },
   button: {
-    margin: '10px 0 10px 0',
-  },
+    margin: '10px 0 10px 0'
+  }
 }));
 
 const Search = () => {
@@ -33,7 +33,7 @@ const Search = () => {
     page: 0,
     size: 10,
     totalPages: 1,
-    totalElements: '?',
+    totalElements: '?'
   });
   const query = new URLSearchParams(window.location.search);
   const search = query.get('search');
@@ -42,13 +42,13 @@ const Search = () => {
     const { content, totalElements, totalPages, number } = await getAllRecipes({
       page,
       size,
-      search,
+      search
     });
-    setPagination((pagination_) => ({
+    setPagination(pagination_ => ({
       ...pagination_,
       totalPages,
       totalElements,
-      page: number + 1,
+      page: number + 1
     }));
     setRecipes(content);
     setLoading(false);
