@@ -1,22 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import { getAllRecipes } from '../service/RecipeService';
 import { makeStyles } from '@material-ui/core/styles';
-import GridList from '@material-ui/core/GridList';
-import GridListTile from '@material-ui/core/GridListTile';
 import {
-  GridListTileBar,
-  IconButton,
   Container,
   Button,
   Grid,
-  Paper, Tabs, Tab, Grow
+  Paper,
+  Tabs,
+  Tab,
+  Grow,
 } from '@material-ui/core';
-import InfoIcon from '@material-ui/icons/Info';
 import AddIcon from '@material-ui/icons/Add';
 import { useHistory } from 'react-router-dom';
-import { ChefHutSpinner, CookieSpiner } from '../components/Spinner';
-import Searcher from '../components/Searcher/Searcher';
 import CardRecipe from '../components/CardRecipe/CardRecipe';
+import InfiniteScroll from '../components/InfiniteScroll';
+import LayoutLoading from '../components/LayoutLoading';
+import SearchHeader from '../components/SearchHeader';
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -36,44 +35,69 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
+const BUTTON_NEW_RECIPE_NAME = 'publicar receta';
+
 const Home = () => {
   const classes = useStyles();
   const [recipes, setRecipes] = useState([]);
   const { push } = useHistory();
   const [loading, setLoading] = useState(true);
+  const [pagination, setPagination] = useState({
+    page: 0,
+    size: 10,
+    totalPages: 1,
+    totalElements: '?',
+  });
+
+  const getPaginationRecipes = async () => {
+    const { page, size } = pagination;
+    const { content, totalElements, totalPages } = await getAllRecipes({
+      page,
+      size,
+    });
+    setPagination((pagination_) => ({
+      ...pagination_,
+      totalPages,
+      totalElements,
+      page: pagination_.page + 1,
+    }));
+    setRecipes((recipes_) => [...recipes_, ...content]);
+    setLoading(false);
+  };
 
   useEffect(() => {
     setLoading(true);
-    getAllRecipes()
-      .then((r) => setRecipes(r))
-      .finally((_) => setLoading(false));
+    getPaginationRecipes();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const handleNewRecipe = () => {
+  const handlePushToNewRecipe = () => {
     push('/recipes/new');
   };
 
   return (
     <Container className={classes.root}>
+      <SearchHeader />
       <Grid justify="center" direction="column">
-        <p style={{ fontSize:'45px', margin:'4rem 0 4rem 0', textAlign:'center', fontFamily: 'Segoe UI semibold', color:'#4a4a4a'}}>¿Que vas a cocinar hoy?</p>
-        <Grid item xs={12} justify="center" style={{ margin: '20px 0 20px 0' }}>
-          <Searcher fromHome={true} />
-        </Grid>
-        <Grid item container justify="center" style={{ margin: '20px 0 20px 0' }}>
+        <Grid
+          item
+          container
+          justify="center"
+          style={{ margin: '20px 0 20px 0' }}
+        >
           <Button
             variant="outlined"
             color="primary"
             size="large"
             className={classes.button}
             startIcon={<AddIcon />}
-            onClick={handleNewRecipe}
+            onClick={handlePushToNewRecipe}
           >
-            publicar receta
+            {BUTTON_NEW_RECIPE_NAME}
           </Button>
         </Grid>
       </Grid>
-      <Grid container style={{ margin:'20px 0 20px 0' }}>
+      <Grid container style={{ margin: '20px 0 20px 0' }}>
         <Paper square>
           <Tabs
             value={0}
@@ -87,15 +111,25 @@ const Home = () => {
           </Tabs>
         </Paper>
       </Grid>
-      <Grid container justify="center" spacing={3}>
-        {recipes.map((recipe, i) => (
-          <Grow in={true} key={i} {...{ timeout: 1000 + i * 400 }}>
-            <Grid item xs={12} sm={3} style={{ marginBottom: '20px' }}>
-              <CardRecipe {...recipe} />
-            </Grid>
-          </Grow>
-        ))}
-      </Grid>
+      <LayoutLoading loading={loading}>
+        <Grid container justify="center" spacing={3}>
+          {recipes.map((recipe, i) => (
+            <>
+              <Grow in={true} key={i} {...{ timeout: 1000 + i * 100 }}>
+                <Grid item xs={12} sm={3} style={{ marginBottom: '20px' }}>
+                  <CardRecipe {...recipe} />
+                </Grid>
+              </Grow>
+              {i + 1 === recipes.length && (
+                <InfiniteScroll
+                  handleScroll={getPaginationRecipes}
+                  hasMore={pagination.page < pagination.totalPages}
+                />
+              )}
+            </>
+          ))}
+        </Grid>
+      </LayoutLoading>
     </Container>
   );
 };
