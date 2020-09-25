@@ -11,6 +11,7 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 import './CardRecipe.css';
 import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { Grow } from '@material-ui/core';
 
 const CardRecipe = ({ imageUrl, description, name, id }) => {
   const { push } = useHistory();
@@ -20,36 +21,38 @@ const CardRecipe = ({ imageUrl, description, name, id }) => {
   };
 
   return (
-    <Card className="cardRecipe">
-      <CardHeader
-        avatar={
-          <Avatar aria-label="recipe" className="cardRecipe-avatar">
-            U
-          </Avatar>
-        }
-        title="Nombre de la Persona"
-        subheader="September 11, 1997"
-      />
-      <CardMedia
-        className="cardRecipe-image"
-        image={imageUrl}
-        title={name}
-        onClick={goToRecipe}
-      />
-      <CardContent>
-        <Typography variant="h6" style={{ padding: '10px 0 10px 0' }}>
-          {name}
-        </Typography>
-        <Typography variant="body2" color="textSecondary" component="p">
-          {description}
-        </Typography>
-      </CardContent>
-      <CardActions disableSpacing>
-        <IconButton aria-label="add to favorites">
-          <FavoriteIcon />
-        </IconButton>
-      </CardActions>
-    </Card>
+    <Grow in>
+      <Card className="cardRecipe">
+        <CardHeader
+          avatar={
+            <Avatar aria-label="recipe" className="cardRecipe-avatar">
+              U
+            </Avatar>
+          }
+          title="Nombre de la Persona"
+          subheader="September 11, 1997"
+        />
+        <CardMedia
+          className="cardRecipe-image"
+          image={imageUrl}
+          title={name}
+          onClick={goToRecipe}
+        />
+        <CardContent>
+          <Typography variant="h6" style={{ padding: '10px 0 10px 0' }}>
+            {name}
+          </Typography>
+          <Typography variant="body2" color="textSecondary" component="p">
+            {description}
+          </Typography>
+        </CardContent>
+        <CardActions disableSpacing>
+          <IconButton aria-label="add to favorites">
+            <FavoriteIcon />
+          </IconButton>
+        </CardActions>
+      </Card>
+    </Grow>
   );
 };
 

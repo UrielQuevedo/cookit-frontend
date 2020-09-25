@@ -4,10 +4,14 @@ import Home from '../views/home';
 import New from '../views/Recipes/New/new';
 import NavbarTop from './Header/navbar-top';
 <<<<<<< HEAD
+<<<<<<< HEAD
 import Search from '../views/Recipes/Search/search';
 =======
 import Search from '../views/Search/search';
 >>>>>>> feat: se agregan los proptypes
+=======
+import Search from '../views/Recipes/Search/search';
+>>>>>>> feat(fix): Sacando los warnings
 import Login from '../views/Login/login';
 import Recipe from '../views/Recipes/recipe';
 import AuthProvider from '../context/auth-context';
