@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import { Container, Grid, Button } from '@material-ui/core';
 import './New.css';
-import { postNewRecipe } from '../../../service/RecipeService';
+import { postNewRecipe } from '../../../service/recipe-service';
 import { useHistory } from 'react-router-dom';
-import ImageInput from '../../../components/NewRecipe/ImageInput';
-import RecipeInputs from '../../../components/NewRecipe/RecipeInputs';
-import IngredientInputs from '../../../components/NewRecipe/IngredientInputs';
-import LayoutSection from '../../../components/NewRecipe/LayoutSection';
-import StepsRecipe from '../../../components/NewRecipe/StepsRecipe';
+import ImageInput from '../../../components/NewRecipe/image-input';
+import RecipeInputs from '../../../components/NewRecipe/recipe-inputs';
+import IngredientInputs from '../../../components/NewRecipe/ingredient-inputs';
+import LayoutSection from '../../../components/NewRecipe/layout-section';
+import StepsRecipe from '../../../components/NewRecipe/steps-recipe';
 
 const New = () => {
   const [recipe, setRecipe] = useState({});
@@ -32,7 +32,6 @@ const New = () => {
 
   const handleSubmit = event => {
     event.preventDefault();
-    // eslint-disable-next-line promise/catch-or-return
     postNewRecipe({
       ...recipe,
       ingredients,
