@@ -24,12 +24,31 @@ const StepsRecipe = ({ stepsRecipes, setStepsRecipes }) => {
           direction="row"
           style={{ marginBottom: '10px' }}
         >
-          <Grid item xs={1}>
-            <span style={{ fontSize: '1.3rem', fontWeight: 'bold' }}>
-              {i + 1}.
+          <Grid
+            item
+            xs={12}
+            sm={1}
+            container
+            justify="flex-start"
+            alignContent="center"
+          >
+            <span
+              style={{
+                background: '#4a4a4a',
+                color: '#fff',
+                borderRadius: '16px',
+                height: '24px',
+                width: '24px',
+                padding: '4px',
+                textAlign: 'center',
+                fontSize: '1rem',
+                fontWeight: 'bold'
+              }}
+            >
+              {i + 1}
             </span>
           </Grid>
-          <Grid item xs={10}>
+          <Grid item xs={11} sm={10}>
             <AbstractInput
               onChange={changeSteps(i)}
               type="text"

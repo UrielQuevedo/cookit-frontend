@@ -31,14 +31,15 @@ const Search = () => {
   const [loading, setLoading] = useState(true);
   const [pagination, setPagination] = useState({
     page: 0,
-    size: 10,
+    size: 2,
     totalPages: 1,
     totalElements: '?'
   });
   const query = new URLSearchParams(window.location.search);
   const search = query.get('search');
 
-  const getPaginationRecipes = async ({ page, size }) => {
+  const getPaginationRecipes = async () => {
+    const { size, page } = pagination;
     const { content, totalElements, totalPages, number } = await getAllRecipes({
       page,
       size,
@@ -56,7 +57,8 @@ const Search = () => {
 
   useEffect(() => {
     setLoading(true);
-    getPaginationRecipes({ ...pagination, page: 0 });
+    setPagination(pagination_ => ({ ...pagination_, page: 0 }));
+    getPaginationRecipes();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [search]);
 
