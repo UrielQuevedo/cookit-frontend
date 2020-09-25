@@ -3,6 +3,19 @@
     "@atixlabs/eslint-config/configurations/react"
   ],
   "rules": {
-    "camelcase": "off"
+    "camelcase": "off",
+    "react/react-in-jsx-scope": "off",
+    "unicorn/consistent-function-scoping": "off",
+    "promise/catch-or-return": "off",
+    "unicorn/filename-case": [
+      "error",
+      {
+        "cases": {
+          "pascalCase": true,
+          "kebabCase": true,
+          "camelCase": true
+        }
+      }
+    ]
   }
 }

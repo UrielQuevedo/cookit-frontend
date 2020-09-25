@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Container, Grid, Typography } from '@material-ui/core';
-import CardRecipe from '../../components/CardRecipe/CardRecipe';
-import SearchHeader from '../../components/SearchHeader';
-import { getAllRecipes } from '../../service/RecipeService';
-import LayoutLoading from '../../components/LayoutLoading';
-import LayoutAlert from '../../components/LayoutAlert';
+import CardRecipe from '../../components/CardRecipe/card-recipe';
+import SearchHeader from '../../components/search-header';
+import { getAllRecipes } from '../../service/recipe-service';
+import LayoutLoading from '../../components/layout-loading';
+import LayoutAlert from '../../components/layout-alert';
 
 const useStyles = makeStyles(() => ({
   root: {

@@ -14,7 +14,7 @@ import {
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
 import { Link } from 'react-router-dom';
-import AuthGoogleLogin from './AuthGoogleLogin';
+import AuthGoogleLogin from './auth-google-login';
 import '../Login/Login.css';
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);

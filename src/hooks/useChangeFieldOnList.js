@@ -1,5 +1,3 @@
-/* eslint-disable unicorn/consistent-function-scoping */
-// eslint-disable-next-line unicorn/filename-case
 export const useChangeFieldOnList = (customList, setCustomList) => {
   const handleChangeField = i => event => {
     const { value, name } = event.target;

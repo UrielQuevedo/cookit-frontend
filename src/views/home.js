@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { getAllRecipes } from '../service/RecipeService';
+import { getAllRecipes } from '../service/recipe-service';
 import { makeStyles } from '@material-ui/core/styles';
 import {
   Container,
@@ -12,10 +12,10 @@ import {
 } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
 import { useHistory } from 'react-router-dom';
-import CardRecipe from '../components/CardRecipe/CardRecipe';
-import InfiniteScroll from '../components/InfiniteScroll';
-import LayoutLoading from '../components/LayoutLoading';
-import SearchHeader from '../components/SearchHeader';
+import CardRecipe from '../components/CardRecipe/card-recipe';
+import InfiniteScroll from '../components/infinite-scroll';
+import LayoutLoading from '../components/layout-loading';
+import SearchHeader from '../components/search-header';
 
 const useStyles = makeStyles(() => ({
   root: {

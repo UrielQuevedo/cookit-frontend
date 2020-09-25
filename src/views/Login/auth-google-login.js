@@ -1,9 +1,9 @@
 import React, { useContext } from 'react';
 import GoogleLogin from 'react-google-login';
 import { Grid } from '@material-ui/core';
-import { loginSocial } from '../../service/AuthService';
+import { loginSocial } from '../../service/auth-service';
 import { useHistory } from 'react-router-dom';
-import { AuthContext } from '../../context/AuthContext';
+import { AuthContext } from '../../context/auth-context';
 
 const AuthGoogleLogin = () => {
   const clientId = process.env.REACT_APP_GOOGLE_CLIENT_ID;
@@ -25,7 +25,6 @@ const AuthGoogleLogin = () => {
       imageUrl: profile.imageUrl
     };
 
-    // eslint-disable-next-line promise/catch-or-return
     loginSocial(googleAccount).then(response_ =>
       successfullLoginSocial(response_)
     );
