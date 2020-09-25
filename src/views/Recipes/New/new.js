@@ -9,6 +9,8 @@ import IngredientInputs from '../../../components/NewRecipe/ingredient-inputs';
 import LayoutSection from '../../../components/NewRecipe/layout-section';
 import StepsRecipe from '../../../components/NewRecipe/steps-recipe';
 
+const PUBLISH_BUTTON_NAME = 'publicar';
+
 const New = () => {
   const [recipe, setRecipe] = useState({});
   const { push } = useHistory();
@@ -63,7 +65,7 @@ const New = () => {
               fullWidth
               style={{ margin: '10px 0 30px 0' }}
             >
-              Publicar
+              {PUBLISH_BUTTON_NAME}
             </Button>
           </LayoutSection>
         </Grid>

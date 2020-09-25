@@ -1,15 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { getAllRecipes } from '../service/recipe-service';
 import { makeStyles } from '@material-ui/core/styles';
-import {
-  Container,
-  Button,
-  Grid,
-  Paper,
-  Tabs,
-  Tab,
-  Grow
-} from '@material-ui/core';
+import { Container, Button, Grid, Paper, Tabs, Tab } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
 import { useHistory } from 'react-router-dom';
 import CardRecipe from '../components/CardRecipe/card-recipe';
@@ -36,7 +28,6 @@ const useStyles = makeStyles(() => ({
 }));
 
 const BUTTON_NEW_RECIPE_NAME = 'publicar receta';
-const NUMBER_OF_TRANSITION = 100;
 
 const Home = () => {
   const classes = useStyles();
@@ -79,7 +70,7 @@ const Home = () => {
   return (
     <Container className={classes.root}>
       <SearchHeader />
-      <Grid justify="center" direction="column">
+      <Grid container justify="center" direction="column">
         <Grid
           item
           container
@@ -115,19 +106,15 @@ const Home = () => {
       <LayoutLoading loading={loading}>
         <Grid container justify="center" spacing={3}>
           {recipes.map((recipe, i) => (
-            <>
-              <Grow in key={i} {...{ timeout: i * NUMBER_OF_TRANSITION }}>
-                <Grid item xs={12} sm={3} style={{ marginBottom: '20px' }}>
-                  <CardRecipe {...recipe} />
-                </Grid>
-              </Grow>
+            <Grid key={i} item xs={12} sm={3} style={{ marginBottom: '20px' }}>
+              <CardRecipe {...recipe} />
               {i + 1 === recipes.length && (
                 <InfiniteScroll
                   handleScroll={getPaginationRecipes}
                   hasMore={pagination.page < pagination.totalPages}
                 />
               )}
-            </>
+            </Grid>
           ))}
         </Grid>
       </LayoutLoading>

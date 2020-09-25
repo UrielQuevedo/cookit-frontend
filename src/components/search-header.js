@@ -19,7 +19,7 @@ const SearchHeader = () => (
         {TITLE}
       </p>
     </Grid>
-    <Grid container justify="center" xs={12}>
+    <Grid container justify="center">
       <Grid item xs={12} sm={8} style={{ margin: '20px 0 20px 0' }}>
         <Searcher />
       </Grid>

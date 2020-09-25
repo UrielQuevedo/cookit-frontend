@@ -10,7 +10,7 @@ const NavbarTop = () => (
   <AppBar position="sticky" className="navbar-color">
     <Toolbar>
       <Grid
-        contianer
+        container
         justify="space-between"
         alignItems="center"
         className="layout-display"
@@ -21,7 +21,7 @@ const NavbarTop = () => (
           </Link>
         </Grid>
         <Grid container item xs={6} justify="flex-end">
-          <Typography variant="h7">
+          <Typography>
             <NavLink
               activeClassName="navbar-item-selected"
               exact
@@ -31,7 +31,7 @@ const NavbarTop = () => (
               inicio
             </NavLink>
           </Typography>
-          <Typography variant="h7">
+          <Typography>
             <NavLink
               activeClassName="navbar-item-selected"
               exact
@@ -41,7 +41,7 @@ const NavbarTop = () => (
               crear
             </NavLink>
           </Typography>
-          <Typography variant="h7">
+          <Typography>
             <NavLink
               activeClassName="navbar-item-selected"
               to="/profile"
