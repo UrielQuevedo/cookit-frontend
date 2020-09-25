@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { getAllRecipes } from '../service/recipe-service';
+import { getAllRecipes } from 'service/recipe-service';
 import { makeStyles } from '@material-ui/core/styles';
 import { Container, Button, Grid, Paper, Tabs, Tab } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
 import { useHistory } from 'react-router-dom';
-import CardRecipe from '../components/CardRecipe/card-recipe';
-import InfiniteScroll from '../components/infinite-scroll';
-import LayoutLoading from '../components/layout-loading';
-import SearchHeader from '../components/search-header';
+import CardRecipe from 'components/CardRecipe/card-recipe';
+import InfiniteScroll from 'components/infinite-scroll';
+import LayoutLoading from 'components/Layout/layout-loading';
+import SearchHeader from 'components/search-header';
 
 const useStyles = makeStyles(() => ({
   root: {

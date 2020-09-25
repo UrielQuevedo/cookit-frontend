@@ -1,12 +1,12 @@
 import { Divider, Grid } from '@material-ui/core';
 import React, { useEffect, useState } from 'react';
-import RecipeDescription from '../../components/Recipe/recipe-description';
-import UserInformation from '../../components/Recipe/user-information';
-import Time from '../../components/Recipe/time';
-import IngredientList from '../../components/Recipe/ingredient-list';
-import StepList from '../../components/Recipe/step-list';
+import RecipeDescription from 'components/Recipe/recipe-description';
+import UserInformation from 'components/Recipe/user-information';
+import Time from 'components/Recipe/time';
+import IngredientList from 'components/Recipe/ingredient-list';
+import StepList from 'components/Recipe/step-list';
 import { useParams } from 'react-router-dom';
-import { getRecipe } from '../../service/recipe-service';
+import { getRecipe } from 'service/recipe-service';
 import './Recipe.css';
 
 const NOMBRE = 'Uriel Quevedo';
