@@ -5,6 +5,8 @@ import AbstractInput from '../abstract-input';
 import LayoutSection from './layout-section';
 import PropTypes from 'prop-types';
 
+const IMAGE_LABEL_NAME = 'Url de la foto';
+
 const ImageInput = ({ recipe, changeField }) => (
   <LayoutSection>
     <img
@@ -13,7 +15,7 @@ const ImageInput = ({ recipe, changeField }) => (
     />
     <Grid container style={{ marginTop: '25px' }}>
       <Grid container item xs={12} xl={2} alignItems="center" justify="center">
-        Url de la foto
+        {IMAGE_LABEL_NAME}
       </Grid>
       <Grid item xs={12}>
         <AbstractInput
