@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import { Container, Grid, Button } from '@material-ui/core';
 import './New.css';
-import { postNewRecipe } from '../../../service/recipe-service';
+import { postNewRecipe } from 'service/recipe-service';
 import { useHistory } from 'react-router-dom';
-import ImageInput from '../../../components/NewRecipe/image-input';
-import RecipeInputs from '../../../components/NewRecipe/recipe-inputs';
-import IngredientInputs from '../../../components/NewRecipe/ingredient-inputs';
-import LayoutSection from '../../../components/NewRecipe/layout-section';
-import StepsRecipe from '../../../components/NewRecipe/steps-recipe';
+import ImageInput from 'components/NewRecipe/image-input';
+import RecipeInputs from 'components/NewRecipe/recipe-inputs';
+import IngredientInputs from 'components/NewRecipe/ingredient-inputs';
+import LayoutSection from 'components/NewRecipe/layout-section';
+import StepsRecipe from 'components/NewRecipe/steps-recipe';
 
 const PUBLISH_BUTTON_NAME = 'publicar';
 

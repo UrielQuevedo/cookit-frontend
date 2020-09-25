@@ -4,7 +4,7 @@ import AbstractInput from '../abstract-input';
 import LayoutSection from './layout-section';
 import CloseIcon from '@material-ui/icons/Close';
 import AddIcon from '@material-ui/icons/Add';
-import { useChangeFieldOnList } from '../../hooks/useChangeFieldOnList';
+import { useChangeFieldOnList } from 'hooks/useChangeFieldOnList';
 import PropTypes from 'prop-types';
 
 const StepsRecipe = ({ stepsRecipes, setStepsRecipes }) => {

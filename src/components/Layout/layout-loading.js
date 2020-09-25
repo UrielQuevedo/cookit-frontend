@@ -1,5 +1,5 @@
 import React from 'react';
-import { ChefHutSpinner } from './spinner';
+import { ChefHutSpinner } from '../spinner';
 import PropTypes from 'prop-types';
 
 const LayoutLoading = ({ loading, children }) =>
