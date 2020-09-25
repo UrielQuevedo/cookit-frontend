@@ -75,7 +75,7 @@ const AuthProvider = ({ children }) => {
   if (!authState) return null;
 
   return (
-    <AuthContext.Provider value={{ authState, setAuth_ }}>
+    <AuthContext.Provider value={{ authState, setAuth: setAuth_ }}>
       {handlerComponent()}
     </AuthContext.Provider>
   );
