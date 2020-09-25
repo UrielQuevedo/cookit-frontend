@@ -1,6 +1,6 @@
 import { Grid } from '@material-ui/core';
 import React from 'react';
-import { IMAGE_DEFAULT_RECIPE } from '../../utils/constants';
+import { IMAGE_DEFAULT_RECIPE } from 'utils/constants';
 import AbstractInput from '../abstract-input';
 import LayoutSection from './layout-section';
 import PropTypes from 'prop-types';

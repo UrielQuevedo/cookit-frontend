@@ -17,5 +17,20 @@
         }
       }
     ]
+  },
+  "settings": {
+    "import/resolver" : {
+      "alias": {
+        "map": [
+          ["components", "./src/components"],
+          ["hooks", "./src/hooks"],
+          ["service", "./src/service"],
+          ["utils", "./src/utils"],
+          ["views", "./src/views"],
+          ["context", "./src/context"]
+        ],
+        "extensions": [".js"]
+      }
+    }
   }
 }

@@ -3,7 +3,7 @@ import React from 'react';
 import AddIcon from '@material-ui/icons/Add';
 import CloseIcon from '@material-ui/icons/Close';
 import LayoutSection from './layout-section';
-import { useChangeFieldOnList } from '../../hooks/useChangeFieldOnList';
+import { useChangeFieldOnList } from 'hooks/useChangeFieldOnList';
 import AbstractInput from '../abstract-input';
 import PropTypes from 'prop-types';
 
