@@ -11,7 +11,7 @@ const getToken = url => {
 };
 
 const axios_api = axios.create({
-  baseURL: `${baseURL}api`
+  baseURL: `${baseURL}/api`
 });
 
 const apiRequest = (method, url, data, parameters) =>
