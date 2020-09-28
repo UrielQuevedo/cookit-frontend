@@ -12,9 +12,11 @@ import './CardRecipe.css';
 import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { Grow } from '@material-ui/core';
+import useTimeAgo from 'hooks/useTimeAgo';
 
-const CardRecipe = ({ imageUrl, description, name, id }) => {
+const CardRecipe = ({ imageUrl, description, created_at, name, id }) => {
   const { push } = useHistory();
+  const value = useTimeAgo(new Date(created_at));
 
   const goToRecipe = () => {
     push(`/recipes/${id}`);
@@ -30,7 +32,7 @@ const CardRecipe = ({ imageUrl, description, name, id }) => {
             </Avatar>
           }
           title="Nombre de la Persona"
-          subheader="September 11, 1997"
+          subheader={value}
         />
         <CardMedia
           className="cardRecipe-image"
@@ -57,6 +59,7 @@ const CardRecipe = ({ imageUrl, description, name, id }) => {
 };
 
 CardRecipe.propTypes = {
+  created_at: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   id: PropTypes.number.isRequired,
   imageUrl: PropTypes.string.isRequired,
