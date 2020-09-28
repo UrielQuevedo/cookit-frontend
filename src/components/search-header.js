@@ -1,30 +1,32 @@
-import { Grid } from '@material-ui/core';
+import { Grid, Hidden } from '@material-ui/core';
 import React from 'react';
 import Searcher from './Searcher/searcher';
 
 const TITLE = '¿Que vas a cocinar hoy?';
 
 const SearchHeader = () => (
-  <Grid container justify="center" direction="column">
-    <Grid item xs={12}>
-      <p
-        style={{
-          fontSize: '45px',
-          margin: '4rem 0 2rem 0',
-          textAlign: 'center',
-          fontFamily: 'Segoe UI semibold',
-          color: '#4a4a4a'
-        }}
-      >
-        {TITLE}
-      </p>
-    </Grid>
-    <Grid container justify="center">
-      <Grid item xs={12} sm={8} style={{ margin: '20px 0 20px 0' }}>
-        <Searcher />
+  <Hidden smDown>
+    <Grid container justify="center" direction="column">
+      <Grid item xs={12}>
+        <p
+          style={{
+            fontSize: '45px',
+            margin: '4rem 0 2rem 0',
+            textAlign: 'center',
+            fontFamily: 'Segoe UI semibold',
+            color: '#4a4a4a'
+          }}
+        >
+          {TITLE}
+        </p>
+      </Grid>
+      <Grid container justify="center">
+        <Grid item xs={12} sm={8} style={{ margin: '20px 0 20px 0' }}>
+          <Searcher />
+        </Grid>
       </Grid>
     </Grid>
-  </Grid>
+  </Hidden>
 );
 
 export default SearchHeader;
