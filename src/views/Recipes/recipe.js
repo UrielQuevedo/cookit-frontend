@@ -8,15 +8,18 @@ import StepList from 'components/Recipe/step-list';
 import { useParams } from 'react-router-dom';
 import { getRecipe } from 'service/recipe-service';
 import './Recipe.css';
+import { formatDateAndTime } from 'utils/format-date-time';
+import { ChefHutSpinner } from 'components/spinner';
 
 const NOMBRE = 'Uriel Quevedo';
-const FECHA_PUBLICACION = '16 de Septiembre 16:24';
 
 const Recipe = () => {
   const { id } = useParams();
   const [recipe, setRecipe] = useState({});
+  const [loading, setLoading] = useState(true);
   const {
     name,
+    created_at,
     description,
     imageUrl,
     comensales,
@@ -26,25 +29,39 @@ const Recipe = () => {
   } = recipe;
 
   useEffect(() => {
-    getRecipe(id).then(recipe_ => setRecipe(recipe_));
-  }, [id]);
+    const getResponse = async () => {
+      setLoading(true);
+      const recipe_ = await getRecipe(id);
+      setRecipe(recipe_);
+      setLoading(false);
+    };
+    getResponse();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <Grid container justify="center">
-      <Grid container item xs={12} sm={6} justify="center" className="bg">
-        <RecipeDescription
-          imageUrl={imageUrl}
-          name={name}
-          description={description}
-        />
-        <UserInformation name={NOMBRE} create_at={FECHA_PUBLICACION} />
-        <Time time={time} />
-        <IngredientList ingredients={ingredients} comensales={comensales} />
-        <Grid item xs={12}>
-          <Divider className="height mb-20" />
-          <StepList steps={steps} />
+      {loading ? (
+        <ChefHutSpinner />
+      ) : (
+        <Grid container item xs={12} sm={6} justify="center" className="bg">
+          <RecipeDescription
+            imageUrl={imageUrl}
+            name={name}
+            description={description}
+          />
+          <UserInformation
+            name={NOMBRE}
+            created_at={formatDateAndTime(created_at)}
+          />
+          <Time time={time} />
+          <IngredientList ingredients={ingredients} comensales={comensales} />
+          <Grid item xs={12}>
+            <Divider className="height mb-20" />
+            <StepList steps={steps} />
+          </Grid>
         </Grid>
-      </Grid>
+      )}
     </Grid>
   );
 };
