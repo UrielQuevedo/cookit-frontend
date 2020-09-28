@@ -22,7 +22,6 @@ const Searcher = () => {
 
   return (
     <SearchBar
-      autoFocus
       placeholder={PLACEHOLDER}
       onChange={handleChangeQuery}
       onRequestSearch={handleSearch}
