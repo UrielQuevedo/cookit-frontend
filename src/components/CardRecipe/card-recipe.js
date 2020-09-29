@@ -11,8 +11,10 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 import './CardRecipe.css';
 import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { Grow } from '@material-ui/core';
+import { Grid, Grow } from '@material-ui/core';
 import useTimeAgo from 'hooks/useTimeAgo';
+
+const TEXT_LIMIT = 150;
 
 const CardRecipe = ({ imageUrl, description, created_at, name, id }) => {
   const { push } = useHistory();
@@ -21,6 +23,15 @@ const CardRecipe = ({ imageUrl, description, created_at, name, id }) => {
   const goToRecipe = () => {
     push(`/recipes/${id}`);
   };
+
+  const visualDescription =
+    description.length > TEXT_LIMIT
+      ? description
+          .slice(0, TEXT_LIMIT)
+          .split(' ')
+          .slice(0, -1)
+          .join(' ')
+      : description;
 
   return (
     <Grow in>
@@ -41,18 +52,25 @@ const CardRecipe = ({ imageUrl, description, created_at, name, id }) => {
           onClick={goToRecipe}
         />
         <CardContent>
-          <Typography variant="h6" style={{ padding: '10px 0 10px 0' }}>
+          <Typography variant="h6" className="title">
             {name}
           </Typography>
-          <Typography variant="body2" color="textSecondary" component="p">
-            {description}
+          <Typography
+            variant="body2"
+            className={description.length >= TEXT_LIMIT ? 'extends' : ''}
+            color="textSecondary"
+            component="p"
+          >
+            {visualDescription}
           </Typography>
         </CardContent>
-        <CardActions disableSpacing>
-          <IconButton aria-label="add to favorites">
-            <FavoriteIcon />
-          </IconButton>
-        </CardActions>
+        <Grid item className="actions">
+          <CardActions>
+            <IconButton aria-label="add to favorites">
+              <FavoriteIcon />
+            </IconButton>
+          </CardActions>
+        </Grid>
       </Card>
     </Grow>
   );

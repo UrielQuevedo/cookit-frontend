@@ -1,9 +1,25 @@
 .cardRecipe {
   transition: .3s !important;
+  height: 39rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.cardRecipe .actions {
+  height: 100%;
+  align-items: flex-end;
+  display: flex;
 }
 
 .cardRecipe:hover {
   transform: scale(1.02);
+}
+
+.cardRecipe .title {
+  overflow:hidden;
+  white-space:nowrap;
+  text-overflow: ellipsis;
+  padding: 10px 0 10px 0;
 }
 
 .cardRecipe .cardRecipe-image {
@@ -19,4 +35,8 @@
 
 .cardRecipe .cardRecipe-avatar {
   background-color: red;
+}
+
+.cardRecipe .extends:last-child::after{
+  content:"...";
 }
