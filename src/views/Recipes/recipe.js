@@ -5,6 +5,7 @@ import UserInformation from 'components/Recipe/user-information';
 import Time from 'components/Recipe/time';
 import IngredientList from 'components/Recipe/ingredient-list';
 import CommentList from 'components/Recipe/comment-list';
+import AddComment from 'components/Recipe/add-coment';
 import StepList from 'components/Recipe/step-list';
 import { useParams } from 'react-router-dom';
 import { getRecipe } from 'service/recipe-service';
@@ -66,6 +67,7 @@ const Recipe = () => {
           <Grid item xs={12}>
             <Divider className="height mb-20" />
             <CommentList comments={comments} />
+            <AddComment />
           </Grid>
         </Grid>
       )}
