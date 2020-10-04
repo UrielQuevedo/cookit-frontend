@@ -51,6 +51,8 @@
   },
   "devDependencies": {
     "@atixlabs/eslint-config": "1.2.3",
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.5",
     "eslint-import-resolver-alias": "^1.1.2",
     "eslint-import-resolver-node": "^0.3.4"
   }
