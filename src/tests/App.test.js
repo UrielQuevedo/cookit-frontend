@@ -6,6 +6,8 @@ import App from '../components/App'
 
 configure({ adapter: new Adapter() })
 
-it('App levanta', () => {
-  shallow(<App />)
+describe('App', () => {
+  it('App levanta', () => {
+    shallow(<App />)
+  })
 })
