@@ -16,9 +16,10 @@ import useTimeAgo from 'hooks/useTimeAgo';
 
 const TEXT_LIMIT = 150;
 
-const CardRecipe = ({ imageUrl, description, created_at, name, id }) => {
+const CardRecipe = ({ imageUrl, description, created_at, name, id, user }) => {
   const { push } = useHistory();
   const value = useTimeAgo(new Date(created_at));
+  const { lastname, name: userName, imageUrl : userImageUrl } = user;
 
   const goToRecipe = () => {
     push(`/recipes/${id}`);
@@ -39,10 +40,10 @@ const CardRecipe = ({ imageUrl, description, created_at, name, id }) => {
         <CardHeader
           avatar={
             <Avatar aria-label="recipe" className="cardRecipe-avatar">
-              U
+              {`${userName[0]}${lastname[0]}`}
             </Avatar>
           }
-          title="Nombre de la Persona"
+          title={`${userName} ${lastname}`}
           subheader={value}
         />
         <CardMedia

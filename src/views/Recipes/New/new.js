@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Container, Grid, Button } from '@material-ui/core';
 import './New.css';
 import { postNewRecipe } from 'service/recipe-service';
@@ -8,12 +8,14 @@ import RecipeInputs from 'components/NewRecipe/recipe-inputs';
 import IngredientInputs from 'components/NewRecipe/ingredient-inputs';
 import LayoutSection from 'components/NewRecipe/layout-section';
 import StepsRecipe from 'components/NewRecipe/steps-recipe';
+import { UserContext } from 'context/user-context';
 
 const PUBLISH_BUTTON_NAME = 'publicar';
 
 const New = () => {
   const [recipe, setRecipe] = useState({});
   const { push } = useHistory();
+  const { user } = useContext(UserContext);
   const [ingredients, setIngredients] = useState([
     { name: undefined, quantity_weight: undefined }
   ]);
@@ -36,6 +38,7 @@ const New = () => {
     event.preventDefault();
     postNewRecipe({
       ...recipe,
+      userId: user.id,
       ingredients,
       steps: stepsRecipes
     }).then(() => sucessfullNewRecipe());
