@@ -1,6 +1,6 @@
 import React, { useState, createContext, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { Redirect, useHistory } from 'react-router';
+import { useHistory } from 'react-router';
 
 const AuthTypes = {
   AUTH: { isAuth: true },
