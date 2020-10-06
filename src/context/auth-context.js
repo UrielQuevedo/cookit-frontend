@@ -1,6 +1,6 @@
 import React, { useState, createContext, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { Redirect } from 'react-router';
+import { Redirect, useHistory } from 'react-router';
 
 const AuthTypes = {
   AUTH: { isAuth: true },
@@ -51,33 +51,41 @@ export const AuthContext = createContext();
 
 const useAuth = () => {
   const [authState, setAuthState] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    setLoading(true);
     checkAuth(setAuthState);
+    setLoading(false);
   }, []);
 
   const setAuth_ = action => reducer(setAuthState, action);
 
-  return [authState, setAuth_];
+  return [loading, authState, setAuth_];
 };
 
 const AuthProvider = ({ children }) => {
   const pathname = window.location.pathname;
   const toCheckPathnames = ['/login'];
-  const [authState, setAuth_] = useAuth();
+  const { push } = useHistory();
+  const [loading, authState, setAuth_] = useAuth();
 
   const handlerComponent = () => {
     if (!authState.isAuth && !toCheckPathnames.includes(pathname))
-      return <Redirect to="/login" />;
+      push('/login');
     return children;
   };
 
-  if (!authState) return null;
-
   return (
-    <AuthContext.Provider value={{ authState, setAuth: setAuth_ }}>
-      {handlerComponent()}
-    </AuthContext.Provider>
+    <>
+      {loading ? (
+        <div>Cargando ...</div>
+      ) : (
+        <AuthContext.Provider value={{ authState, setAuth: setAuth_ }}>
+          {handlerComponent()}
+        </AuthContext.Provider>
+      )}
+    </>
   );
 };
 
