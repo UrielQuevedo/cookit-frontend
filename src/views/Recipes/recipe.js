@@ -28,8 +28,8 @@ const Recipe = () => {
     ingredients,
     steps,
     time,
-    comments
   } = recipe;
+  const [ comments, setComments ] = useState([]);
 
   useEffect(() => {
     const getResponse = async () => {
@@ -37,6 +37,7 @@ const Recipe = () => {
       const recipe_ = await getRecipe(id);
       console.log(recipe_)
       setRecipe(recipe_);
+      setComments(recipe_.comments)
       setLoading(false);
     };
     getResponse();
@@ -67,7 +68,7 @@ const Recipe = () => {
           <Grid item xs={12}>
             <Divider className="height mb-20" />
             <CommentList comments={comments} />
-            <AddComment />
+            <AddComment idRecipe={id} setComments={setComments} />
           </Grid>
         </Grid>
       )}
