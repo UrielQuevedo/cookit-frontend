@@ -4,6 +4,8 @@ import RecipeDescription from 'components/Recipe/recipe-description';
 import UserInformation from 'components/Recipe/user-information';
 import Time from 'components/Recipe/time';
 import IngredientList from 'components/Recipe/ingredient-list';
+import CommentList from 'components/Recipe/comment-list';
+import AddComment from 'components/Recipe/add-coment';
 import StepList from 'components/Recipe/step-list';
 import { useParams } from 'react-router-dom';
 import { getRecipe } from 'service/recipe-service';
@@ -25,14 +27,17 @@ const Recipe = () => {
     comensales,
     ingredients,
     steps,
-    time
+    time,
   } = recipe;
+  const [ comments, setComments ] = useState([]);
 
   useEffect(() => {
     const getResponse = async () => {
       setLoading(true);
       const recipe_ = await getRecipe(id);
+      console.log(recipe_)
       setRecipe(recipe_);
+      setComments(recipe_.comments)
       setLoading(false);
     };
     getResponse();
@@ -59,6 +64,11 @@ const Recipe = () => {
           <Grid item xs={12}>
             <Divider className="height mb-20" />
             <StepList steps={steps} />
+          </Grid>
+          <Grid item xs={12}>
+            <Divider className="height mb-20" />
+            <CommentList comments={comments} />
+            <AddComment idRecipe={id} setComments={setComments} />
           </Grid>
         </Grid>
       )}
