@@ -61,7 +61,7 @@ const AddComment = ({ idRecipe, setComments, onSubmit = null }) => {
         alignItems="center"
       >
         <Avatar aria-label="userImage" style={{ background: 'red' }}>
-          {`${user.user.name[0]}${user.user.lastname[0]}`}
+          {user && `${user.user.name[0]}${user.user.lastname[0]}`}
         </Avatar>
         {count < 50 ? (
           <p style={{ color: 'red' }}>{count}</p>
@@ -70,9 +70,10 @@ const AddComment = ({ idRecipe, setComments, onSubmit = null }) => {
         )}
       </Grid>
       <Grid item xs={11}>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} data-testid="addCommentForm">
           <TextField
             id="outlined-textarea"
+            data-testid="comment"
             placeholder="Escribe un comentario..."
             multiline
             variant="outlined"
