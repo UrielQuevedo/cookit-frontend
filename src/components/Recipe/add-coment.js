@@ -4,7 +4,7 @@ import SendIcon from '@material-ui/icons/Send';
 import { postNewComment } from '../../service/recipe-service';
 import { UserContext } from 'context/user-context';
 
-const AddComment = ({ idRecipe, setComments }) => {
+const AddComment = ({ idRecipe, setComments, onSubmit=null }) => {
 
     const [ comment, setComment ] = useState('');
     const user = useContext(UserContext);
@@ -15,16 +15,20 @@ const AddComment = ({ idRecipe, setComments }) => {
 
     const handleSubmit = event => {
       event.preventDefault();
-      const request = { message: comment, idRecipe: idRecipe, idUser: user.user.id }
-      postNewComment(request)
-      .then(newComment => {
-        setComments(oldComments => {
-          let comments_ = oldComments.map(comment => comment);
-          comments_.push(newComment);
-          return comments_;
-        })
-      })
-      event.target.reset();
+      if (onSubmit != null) {
+        onSubmit({ comment });
+      } else {
+          const request = { message: comment, idRecipe: idRecipe, idUser: user.user.id }
+          postNewComment(request)
+          .then(newComment => {
+            setComments(oldComments => {
+              let comments_ = oldComments.map(comment => comment);
+              comments_.push(newComment);
+              return comments_;
+            })
+          })
+          event.target.reset();
+        }
     }
     
     return (
@@ -33,13 +37,14 @@ const AddComment = ({ idRecipe, setComments }) => {
         <Avatar 
           aria-label="userImage" 
           style={{ background: 'blue', marginTop: '5px', marginRight: '5px' }}>
-           {`${user.user.name[0]}${user.user.lastname[0]}`}
+           {user && `${user.user.name[0]}${user.user.lastname[0]}`}
         </Avatar>
         </Grid>
         <Grid item xs={11}>
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit} data-testid="addCommentForm">
             <TextField
               id="outlined-textarea"
+              data-testid="comment"
               placeholder="Escribe un comentario..."
               multiline
               variant="outlined"
