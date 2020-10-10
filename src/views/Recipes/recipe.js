@@ -67,8 +67,8 @@ const Recipe = () => {
           </Grid>
           <Grid item xs={12}>
             <Divider className="height mb-20" />
-            <CommentList comments={comments} />
-            <AddComment idRecipe={id} setComments={setComments} />
+            <CommentList data-testid="comments" comments={comments} />
+            <AddComment data-testid="add-comment" idRecipe={id} setComments={setComments} />
           </Grid>
         </Grid>
       )}

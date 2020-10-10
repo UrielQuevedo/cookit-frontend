@@ -22,10 +22,12 @@ const Searcher = () => {
 
   return (
     <SearchBar
+      data-testid="query"
       placeholder={PLACEHOLDER}
       onChange={handleChangeQuery}
       onRequestSearch={handleSearch}
       onCancelSearch={onHandleCancel}
+      value={query}
     />
   );
 };
