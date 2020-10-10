@@ -13,8 +13,6 @@ import './Recipe.css';
 import { formatDateAndTime } from 'utils/format-date-time';
 import { ChefHutSpinner } from 'components/spinner';
 
-const NOMBRE = 'Uriel Quevedo';
-
 const Recipe = () => {
   const { id } = useParams();
   const [recipe, setRecipe] = useState({});
@@ -28,6 +26,7 @@ const Recipe = () => {
     ingredients,
     steps,
     time,
+    user
   } = recipe;
   const [ comments, setComments ] = useState([]);
 
@@ -35,9 +34,8 @@ const Recipe = () => {
     const getResponse = async () => {
       setLoading(true);
       const recipe_ = await getRecipe(id);
-      console.log(recipe_)
       setRecipe(recipe_);
-      setComments(recipe_.comments)
+      setComments(recipe_.comments);
       setLoading(false);
     };
     getResponse();
@@ -56,7 +54,7 @@ const Recipe = () => {
             description={description}
           />
           <UserInformation
-            name={NOMBRE}
+            name={`${user.name} ${user.lastname}`}
             created_at={formatDateAndTime(created_at)}
           />
           <Time time={time} />
