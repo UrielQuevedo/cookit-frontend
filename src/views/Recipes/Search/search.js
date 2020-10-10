@@ -68,7 +68,7 @@ const Search = () => {
       <LayoutLoading loading={loading}>
         <Grid container justify="center" spacing={3}>
           <Grid item xs={12}>
-            <Typography variant="h5">
+            <Typography variant="h5" style={{ marginTop: '20px' }}>
               Busqueda realizada por "{search}"
             </Typography>
           </Grid>

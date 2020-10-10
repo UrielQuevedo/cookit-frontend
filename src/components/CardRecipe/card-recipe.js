@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
 import CardMedia from '@material-ui/core/CardMedia';
@@ -11,18 +11,39 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 import './CardRecipe.css';
 import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { Grid, Grow } from '@material-ui/core';
+import { Grid, Grow, Snackbar } from '@material-ui/core';
 import useTimeAgo from 'hooks/useTimeAgo';
+import { UserContext } from 'context/user-context';
+import { postAddFavorite } from 'service/user-service';
+import Alert from '@material-ui/lab/Alert';
 
 const TEXT_LIMIT = 150;
+const MESSAGE_FAVORITE_SUCCESSFUL = 'Se agrego correctamente a favoritos';
 
-const CardRecipe = ({ imageUrl, description, created_at, name, id, user }) => {
+const CardRecipe = recipe => {
+  const { imageUrl, description, created_at, name, id, user } = recipe;
   const { push } = useHistory();
   const value = useTimeAgo(new Date(created_at));
-  const { lastname, name: userName, imageUrl : userImageUrl } = user;
+
+  const { lastname, name: userName, imageUrl: userImageUrl } = user;
+  const { user: myUser, setUser } = useContext(UserContext);
+  const [open, setOpen] = useState(false);
 
   const goToRecipe = () => {
     push(`/recipes/${id}`);
+  };
+
+  const addToFavorite = () => {
+    postAddFavorite(myUser.id, id);
+    setUser(u => ({ ...u, favorites: [...u.favorites, recipe] }));
+    setOpen(true);
+  };
+
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setOpen(false);
   };
 
   const visualDescription =
@@ -67,11 +88,27 @@ const CardRecipe = ({ imageUrl, description, created_at, name, id, user }) => {
         </CardContent>
         <Grid item className="actions">
           <CardActions>
-            <IconButton aria-label="add to favorites">
-              <FavoriteIcon />
-            </IconButton>
+            {(myUser.favorites || []).find(f => f.id === id) ? (
+              <IconButton aria-label="add to favorites">
+                <FavoriteIcon style={{ color: 'red' }} />
+              </IconButton>
+            ) : (
+              <IconButton aria-label="add to favorites" onClick={addToFavorite}>
+                <FavoriteIcon />
+              </IconButton>
+            )}
           </CardActions>
         </Grid>
+        <Snackbar
+          anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+          autoHideDuration={3000}
+          onClose={handleClose}
+          open={open}
+        >
+          <Alert onClose={handleClose} severity="success">
+            {MESSAGE_FAVORITE_SUCCESSFUL}
+          </Alert>
+        </Snackbar>
       </Card>
     </Grow>
   );
