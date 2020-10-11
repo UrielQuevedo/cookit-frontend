@@ -1,11 +1,12 @@
 import { Avatar, Button, Grid, Typography } from '@material-ui/core';
 import React from 'react';
 import PropTypes from 'prop-types';
+import AvatarImage from 'components/User/avatar-image';
 
 const FOLLOW_BUTTON_NAME = 'seguir';
 const PUBLISHED_TITLE = 'Publicado: ';
 
-const UserInformation = ({ name, created_at }) => (
+const UserInformation = ({ user, created_at }) => (
   <Grid
     item
     xs={12}
@@ -15,12 +16,16 @@ const UserInformation = ({ name, created_at }) => (
     container
   >
     <Grid item xs={12} sm={1} container justify="center" className="mt-10">
-      <Avatar aria-label="recipe" style={{ background: 'red' }}>
-        U
-      </Avatar>
+      <AvatarImage
+        name={user.name}
+        lastname={user.lastname}
+        imageUrl={user.imageUrl}
+      />
     </Grid>
     <Grid item xs={12} sm={8} className="mt-10">
-      <Typography className="fw-500">{name}</Typography>
+      <Typography className="fw-500">
+        {user.name} {user.lastname}
+      </Typography>
       <Typography variant="subtitle2" className="fw-200">
         {PUBLISHED_TITLE} {created_at}
       </Typography>
@@ -35,7 +40,7 @@ const UserInformation = ({ name, created_at }) => (
 
 UserInformation.propTypes = {
   created_at: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired
+  user: PropTypes.object.isRequired
 };
 
 export default UserInformation;

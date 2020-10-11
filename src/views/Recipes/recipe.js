@@ -4,8 +4,8 @@ import RecipeDescription from 'components/Recipe/recipe-description';
 import UserInformation from 'components/Recipe/user-information';
 import Time from 'components/Recipe/time';
 import IngredientList from 'components/Recipe/ingredient-list';
-import CommentList from 'components/Recipe/comment-list';
-import AddComment from 'components/Recipe/add-coment';
+import CommentList from 'components/Recipe/Comment/comment-list';
+import AddComment from 'components/Recipe/Comment/add-coment';
 import StepList from 'components/Recipe/step-list';
 import { useParams } from 'react-router-dom';
 import { getRecipe } from 'service/recipe-service';
@@ -28,7 +28,7 @@ const Recipe = () => {
     time,
     user
   } = recipe;
-  const [ comments, setComments ] = useState([]);
+  const [comments, setComments] = useState([]);
 
   useEffect(() => {
     const getResponse = async () => {
@@ -54,7 +54,7 @@ const Recipe = () => {
             description={description}
           />
           <UserInformation
-            name={`${user.name} ${user.lastname}`}
+            user={user}
             created_at={formatDateAndTime(created_at)}
           />
           <Time time={time} />
@@ -66,7 +66,11 @@ const Recipe = () => {
           <Grid item xs={12}>
             <Divider className="height mb-20" />
             <CommentList data-testid="comments" comments={comments} />
-            <AddComment data-testid="add-comment" idRecipe={id} setComments={setComments} />
+            <AddComment
+              data-testid="add-comment"
+              idRecipe={id}
+              setComments={setComments}
+            />
           </Grid>
         </Grid>
       )}

@@ -7,14 +7,16 @@ import {
   IconButton
 } from '@material-ui/core';
 import SendIcon from '@material-ui/icons/Send';
-import { postNewComment } from '../../service/recipe-service';
+import { postNewComment } from 'service/recipe-service';
 import { UserContext } from 'context/user-context';
+import AvatarImage from 'components/User/avatar-image';
 
 const TEXT_COMMENT_LIMIT = 200;
 
 const AddComment = ({ idRecipe, setComments, onSubmit = null }) => {
   const [comment, setComment] = useState('');
-  const user = useContext(UserContext);
+  const { user } = useContext(UserContext);
+  const { name, lastname, imageUrl, id } = user;
   const [count, setCount] = useState(TEXT_COMMENT_LIMIT);
 
   const handleInput = event => {
@@ -31,7 +33,7 @@ const AddComment = ({ idRecipe, setComments, onSubmit = null }) => {
       const request = {
         message: comment,
         idRecipe,
-        idUser: user.user.id
+        idUser: id
       };
       postNewComment(request).then(newComment => {
         setComments(oldComments => {
@@ -40,6 +42,7 @@ const AddComment = ({ idRecipe, setComments, onSubmit = null }) => {
           return comments_;
         });
       });
+      setCount(TEXT_COMMENT_LIMIT);
       event.target.reset();
     }
   };
@@ -60,9 +63,7 @@ const AddComment = ({ idRecipe, setComments, onSubmit = null }) => {
         direction="column"
         alignItems="center"
       >
-        <Avatar aria-label="userImage" style={{ background: 'red' }}>
-          {user && `${user.user.name[0]}${user.user.lastname[0]}`}
-        </Avatar>
+        <AvatarImage name={name} lastname={lastname} imageUrl={imageUrl} />
         {count < 50 ? (
           <p style={{ color: 'red' }}>{count}</p>
         ) : (
