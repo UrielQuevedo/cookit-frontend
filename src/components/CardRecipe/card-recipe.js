@@ -14,7 +14,7 @@ import PropTypes from 'prop-types';
 import { Grid, Grow, Snackbar } from '@material-ui/core';
 import useTimeAgo from 'hooks/useTimeAgo';
 import { UserContext } from 'context/user-context';
-import { postAddFavorite } from 'service/user-service';
+import { deleteRecipeToFavorite, postAddFavorite } from 'service/user-service';
 import Alert from '@material-ui/lab/Alert';
 import AvatarImage from 'components/User/avatar-image';
 import EditIcon from '@material-ui/icons/Edit';
@@ -45,6 +45,11 @@ const CardRecipe = recipe => {
     postAddFavorite(myUser.id, id);
     setUser(u => ({ ...u, favorites: [...u.favorites, recipe] }));
     setOpen(true);
+  };
+
+  const removeToFavorite = () => {
+    deleteRecipeToFavorite(myUser.id, id);
+    setUser(u => ({ ...u, favorites: u.favorites.filter(f => f.id !== id) }));
   };
 
   const handleClose = (event, reason) => {
@@ -99,7 +104,10 @@ const CardRecipe = recipe => {
         <Grid item className="actions">
           <CardActions>
             {(myUser.favorites || []).find(f => f.id === id) ? (
-              <IconButton aria-label="add to favorites">
+              <IconButton
+                aria-label="add to favorites"
+                onClick={removeToFavorite}
+              >
                 <FavoriteIcon style={{ color: 'red' }} />
               </IconButton>
             ) : (
