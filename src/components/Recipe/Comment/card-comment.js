@@ -8,6 +8,7 @@ import {
   Button
 } from '@material-ui/core';
 import useTimeAgo from 'hooks/useTimeAgo';
+import AvatarImage from 'components/User/avatar-image';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -23,6 +24,7 @@ const useStyles = makeStyles(theme => ({
 
 const Comment = ({ comment }) => {
   const { message, created_at, owner } = comment;
+  const { imageUrl, name, lastname } = owner;
   const time = useTimeAgo(new Date(created_at));
   const classes = useStyles();
 
@@ -31,13 +33,11 @@ const Comment = ({ comment }) => {
       <Paper className={classes.paper}>
         <Grid container wrap="nowrap" spacing={2}>
           <Grid item>
-            <Avatar style={{ background: 'red' }}>
-              {`${owner.name[0]}${owner.lastname[0]}`}
-            </Avatar>
+            <AvatarImage name={name} lastname={lastname} imageUrl={imageUrl} />
           </Grid>
           <Grid item xs>
             <Typography style={{ fontWeight: 'bold' }}>
-              {owner.name} {owner.lastname}
+              {name} {lastname}
             </Typography>
             <Typography style={{ color: 'grey', marginBottom: '5px' }}>
               {time}

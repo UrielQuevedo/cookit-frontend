@@ -16,6 +16,9 @@ import useTimeAgo from 'hooks/useTimeAgo';
 import { UserContext } from 'context/user-context';
 import { postAddFavorite } from 'service/user-service';
 import Alert from '@material-ui/lab/Alert';
+import AvatarImage from 'components/User/avatar-image';
+import EditIcon from '@material-ui/icons/Edit';
+import DeleteIcon from '@material-ui/icons/Delete';
 
 const TEXT_LIMIT = 150;
 const MESSAGE_FAVORITE_SUCCESSFUL = 'Se agrego correctamente a favoritos';
@@ -25,7 +28,12 @@ const CardRecipe = recipe => {
   const { push } = useHistory();
   const value = useTimeAgo(new Date(created_at));
 
-  const { lastname, name: userName, imageUrl: userImageUrl } = user;
+  const {
+    lastname,
+    name: userName,
+    imageUrl: userImageUrl,
+    id: recipeUserId
+  } = user;
   const { user: myUser, setUser } = useContext(UserContext);
   const [open, setOpen] = useState(false);
 
@@ -60,9 +68,11 @@ const CardRecipe = recipe => {
       <Card className="cardRecipe">
         <CardHeader
           avatar={
-            <Avatar aria-label="recipe" className="cardRecipe-avatar">
-              {`${userName[0]}${lastname[0]}`}
-            </Avatar>
+            <AvatarImage
+              name={userName}
+              lastname={lastname}
+              imageUrl={userImageUrl}
+            />
           }
           title={`${userName} ${lastname}`}
           subheader={value}
@@ -96,6 +106,16 @@ const CardRecipe = recipe => {
               <IconButton aria-label="add to favorites" onClick={addToFavorite}>
                 <FavoriteIcon />
               </IconButton>
+            )}
+            {recipeUserId === myUser.id && (
+              <>
+                <IconButton aria-label="add to favorites">
+                  <EditIcon />
+                </IconButton>
+                <IconButton aria-label="add to favorites">
+                  <DeleteIcon />
+                </IconButton>
+              </>
             )}
           </CardActions>
         </Grid>

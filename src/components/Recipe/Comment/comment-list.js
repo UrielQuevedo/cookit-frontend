@@ -1,7 +1,7 @@
 import React from 'react';
 import { Divider, Grid, Typography } from '@material-ui/core';
-import SectionTitle from './section-title';
 import Comment from './card-comment';
+import SectionTitle from '../section-title';
 
 const TITLE = 'Comentarios';
 
