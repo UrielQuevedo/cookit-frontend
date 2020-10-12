@@ -1,10 +1,9 @@
-import { Divider, Grid } from '@material-ui/core';
+import { Divider, Grid, Link } from '@material-ui/core';
 import React, { useEffect, useState } from 'react';
 import RecipeDescription from 'components/Recipe/recipe-description';
 import UserInformation from 'components/Recipe/user-information';
 import Time from 'components/Recipe/time';
 import IngredientList from 'components/Recipe/ingredient-list';
-import CommentList from 'components/Recipe/Comment/comment-list';
 import AddComment from 'components/Recipe/Comment/add-coment';
 import StepList from 'components/Recipe/step-list';
 import { useParams } from 'react-router-dom';
@@ -12,6 +11,10 @@ import { getRecipe } from 'service/recipe-service';
 import './Recipe.css';
 import { formatDateAndTime } from 'utils/format-date-time';
 import { ChefHutSpinner } from 'components/spinner';
+import SectionTitle from '../../components/Recipe/section-title';
+import Comment from '../../components/Recipe/Comment/card-comment';
+
+const TITLE = 'Comentarios';
 
 const Recipe = () => {
   const { id } = useParams();
@@ -23,24 +26,31 @@ const Recipe = () => {
     description,
     imageUrl,
     comensales,
+    
     ingredients,
     steps,
     time,
-    user
+    user,
   } = recipe;
-  const [comments, setComments] = useState([]);
+  const [lastComment, setLastComment] = useState(null);
+  const [commentsSize, setCommentsSize] = useState(0);
 
   useEffect(() => {
     const getResponse = async () => {
       setLoading(true);
       const recipe_ = await getRecipe(id);
       setRecipe(recipe_);
-      setComments(recipe_.comments);
+      setLastComment(recipe_.lastComment);
+      setCommentsSize(recipe_.commentsSize);
       setLoading(false);
     };
     getResponse();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  const handlePageComments = e => {
+    console.log('ir a la pag de comentarios');
+  }
 
   return (
     <Grid container justify="center">
@@ -63,13 +73,22 @@ const Recipe = () => {
             <Divider className="height mb-20" />
             <StepList steps={steps} />
           </Grid>
-          <Grid item xs={12}>
+          <Grid item xs={12} className="plr-20">
             <Divider className="height mb-20" />
-            <CommentList data-testid="comments" comments={comments} />
+            <SectionTitle title={`${TITLE} (${commentsSize})`} />
+            {lastComment 
+              && <Link href="#" onClick={handlePageComments} color='textSecondary'>
+                  Ver todos los comentarios
+                 </Link> 
+            }
+          </Grid>
+          <Grid item xs={12}>
+            {lastComment && <Comment comment={lastComment}/>}
             <AddComment
               data-testid="add-comment"
               idRecipe={id}
-              setComments={setComments}
+              setLastComment={setLastComment}
+              setCommentsSize={setCommentsSize}
             />
           </Grid>
         </Grid>
