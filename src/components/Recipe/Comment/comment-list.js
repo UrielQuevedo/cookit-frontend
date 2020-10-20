@@ -1,4 +1,4 @@
-import React from 'react';
+/*import React from 'react';
 import { Divider, Grid, Typography } from '@material-ui/core';
 import Comment from './card-comment';
 import SectionTitle from '../section-title';
@@ -15,4 +15,4 @@ const CommentList = ({ comments }) => (
   </Grid>
 );
 
-export default CommentList;
+export default CommentList;*/

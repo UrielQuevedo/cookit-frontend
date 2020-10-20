@@ -6,7 +6,7 @@ import Time from 'components/Recipe/time';
 import IngredientList from 'components/Recipe/ingredient-list';
 import AddComment from 'components/Recipe/Comment/add-coment';
 import StepList from 'components/Recipe/step-list';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 import { getRecipe } from 'service/recipe-service';
 import './Recipe.css';
 import { formatDateAndTime } from 'utils/format-date-time';
@@ -34,6 +34,7 @@ const Recipe = () => {
   } = recipe;
   const [lastComment, setLastComment] = useState(null);
   const [commentsSize, setCommentsSize] = useState(0);
+  const { push } = useHistory();
 
   useEffect(() => {
     const getResponse = async () => {
@@ -48,8 +49,8 @@ const Recipe = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const handlePageComments = e => {
-    console.log('ir a la pag de comentarios');
+  const goToPageComments = _ => {
+    push(`/recipes/${id}/comments`);
   }
 
   return (
@@ -77,7 +78,7 @@ const Recipe = () => {
             <Divider className="height mb-20" />
             <SectionTitle title={`${TITLE} (${commentsSize})`} />
             {lastComment 
-              && <Link href="#" onClick={handlePageComments} color='textSecondary'>
+              && <Link onClick={goToPageComments} color='textSecondary'>
                   Ver todos los comentarios
                  </Link> 
             }
