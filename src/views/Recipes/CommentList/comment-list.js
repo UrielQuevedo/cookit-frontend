@@ -17,7 +17,7 @@ const CommentList = () => {
             </Typography>
           </Grid>
           <Grid item xs={12} className="plr-20">
-            <Typography variant="h4" className="comment-name"> 
+            <Typography variant="h4" className="recipe-name"> 
               {recipeName}
             </Typography>
           </Grid>
