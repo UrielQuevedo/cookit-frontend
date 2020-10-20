@@ -50,7 +50,13 @@ const Recipe = () => {
   }, []);
 
   const goToPageComments = _ => {
-    push(`/recipes/${id}/comments`);
+    push({
+      pathname: `/recipes/${id}/comments`,
+      state: {
+          recipeName: name,
+          recipeImageUrl: imageUrl
+        }
+      })
   }
 
   return (

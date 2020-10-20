@@ -1,0 +1,13 @@
+.image-recipe {
+    height: 250px;
+}
+
+.comment-description {
+    text-align: center;
+}
+
+.comment-name {
+    text-align: center;
+    color: #4a4a4a;
+    font-weight: 500 !important;
+}
