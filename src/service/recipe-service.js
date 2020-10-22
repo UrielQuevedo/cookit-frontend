@@ -10,3 +10,5 @@ export const postNewComment = comment =>
   API.post(`${URL_BASE}/comments`, comment);
 
 export const getRecipe = id => API.get(`${URL_BASE}/${id}`);
+
+export const getComments = (idRecipe, parameters) => API.get(`${URL_BASE}/${idRecipe}/comments`, parameters);
