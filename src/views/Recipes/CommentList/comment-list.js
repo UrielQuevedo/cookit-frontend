@@ -3,6 +3,8 @@ import { useParams, useLocation } from 'react-router-dom';
 import { Grid, Typography } from '@material-ui/core';
 import Comments from '../../../components/Recipe/Comment/comments';
 import { getComments } from '../../../service/recipe-service';
+import AddComment from '../../../components/Recipe/Comment/add-coment';
+
 import './comment-list.css';
 
 const CommentList = () => {
@@ -10,17 +12,31 @@ const CommentList = () => {
   const { state } = useLocation();
   const { recipeName, recipeImageUrl } = state;
   const [comments, setComments] = useState([]);
+  const [pagination, setPagination] = useState({
+    page: 0,
+    size: 5,
+    totalPages: 1,
+    totalElements: '?'
+  });
 
-  const getComments_ = async () => {
-    const { content } = await getComments(id, {
-      page: 0,
-      size: 2
+  const getPaginationComments = async () => {
+    const { page, size } = pagination;
+
+    const { content, totalElements, totalPages } = await getComments(id, {
+      page,
+      size
     });
-    console.log(content)
+    setPagination(pagination_ => ({
+      ...pagination_,
+      totalPages,
+      totalElements,
+      page: pagination_.page + 1
+    }));
+    setComments(comments_ => [...comments_, ...content])
   };
 
   useEffect(() => {
-    getComments_();
+    getPaginationComments();
   }, []);
 
   return (
@@ -42,7 +58,7 @@ const CommentList = () => {
       </Grid>
       <Grid container justify="center" style={{ marginTop: '50px' }}>
         <Grid container item xs={12} sm={6} justify="center" className="bg">
-       
+          <Comments comments={comments} getPaginationComments={getPaginationComments} pagination={pagination}/>
         </Grid>
       </Grid>  
     </div>
