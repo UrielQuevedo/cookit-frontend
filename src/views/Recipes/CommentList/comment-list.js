@@ -4,7 +4,7 @@ import { Grid, Typography } from '@material-ui/core';
 import Comments from '../../../components/Recipe/Comment/comments';
 import { getComments } from '../../../service/recipe-service';
 import AddComment from '../../../components/Recipe/Comment/add-coment';
-
+import LayoutLoading from '../../../components/Layout/layout-loading';
 import './comment-list.css';
 
 const CommentList = () => {
@@ -12,6 +12,7 @@ const CommentList = () => {
   const { state } = useLocation();
   const { recipeName, recipeImageUrl } = state;
   const [comments, setComments] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [pagination, setPagination] = useState({
     page: 0,
     size: 5,
@@ -21,7 +22,7 @@ const CommentList = () => {
 
   const getPaginationComments = async () => {
     const { page, size } = pagination;
-
+    debugger;
     const { content, totalElements, totalPages } = await getComments(id, {
       page,
       size
@@ -33,9 +34,11 @@ const CommentList = () => {
       page: pagination_.page + 1
     }));
     setComments(comments_ => [...comments_, ...content])
+    setLoading(false);
   };
 
   useEffect(() => {
+    setLoading(true);
     getPaginationComments();
   }, []);
 
@@ -56,11 +59,13 @@ const CommentList = () => {
             </Grid>
           </Grid>
       </Grid>
-      <Grid container justify="center" style={{ marginTop: '50px' }}>
-        <Grid container item xs={12} sm={6} justify="center" className="bg">
-          <Comments comments={comments} getPaginationComments={getPaginationComments} pagination={pagination}/>
+        <Grid container justify="center" style={{ marginTop: '50px' }}>
+          <LayoutLoading loading={loading}>
+            <Grid container item xs={12} sm={6} justify="center" className="bg">
+              <Comments comments={comments} getPaginationComments={getPaginationComments} pagination={pagination}/>
+            </Grid>
+          </LayoutLoading>
         </Grid>
-      </Grid>  
     </div>
   )
 }

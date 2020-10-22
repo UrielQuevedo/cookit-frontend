@@ -33,7 +33,6 @@ const Comment = ({ comment }) => {
       <Paper className={classes.paper}>
         <Grid container wrap="nowrap" spacing={2}>
           <Grid item>
-            {console.log(time)}
             <AvatarImage name={name} lastname={lastname} imageUrl={imageUrl} />
           </Grid>
           <Grid item xs>
