@@ -22,7 +22,6 @@ const CommentList = () => {
 
   const getPaginationComments = async () => {
     const { page, size } = pagination;
-    debugger;
     const { content, totalElements, totalPages } = await getComments(id, {
       page,
       size
