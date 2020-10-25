@@ -5,7 +5,8 @@ import {
   Avatar,
   Typography,
   makeStyles,
-  Button
+  Button,
+  Grow
 } from '@material-ui/core';
 import useTimeAgo from 'hooks/useTimeAgo';
 import AvatarImage from 'components/User/avatar-image';
@@ -29,25 +30,26 @@ const Comment = ({ comment }) => {
   const classes = useStyles();
 
   return (
-    <div className={classes.root}>
-      <Paper className={classes.paper}>
-        <Grid container wrap="nowrap" spacing={2}>
-          <Grid item>
-            {console.log(time)}
-            <AvatarImage name={name} lastname={lastname} imageUrl={imageUrl} />
+    <Grow in>
+      <div className={classes.root}>
+        <Paper className={classes.paper}>
+          <Grid container wrap="nowrap" spacing={2}>
+            <Grid item>
+              <AvatarImage name={name} lastname={lastname} imageUrl={imageUrl} />
+            </Grid>
+            <Grid item xs>
+              <Typography style={{ fontWeight: 'bold' }}>
+                {name} {lastname}
+              </Typography>
+              <Typography style={{ color: 'grey', marginBottom: '5px' }}>
+                {time}
+              </Typography>
+              <Typography>{message}</Typography>
+            </Grid>
           </Grid>
-          <Grid item xs>
-            <Typography style={{ fontWeight: 'bold' }}>
-              {name} {lastname}
-            </Typography>
-            <Typography style={{ color: 'grey', marginBottom: '5px' }}>
-              {time}
-            </Typography>
-            <Typography>{message}</Typography>
-          </Grid>
-        </Grid>
-      </Paper>
-    </div>
+        </Paper>
+      </div>
+    </Grow>
   );
 };
 
