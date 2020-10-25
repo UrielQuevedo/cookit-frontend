@@ -62,6 +62,7 @@ const CommentList = () => {
           <LayoutLoading loading={loading}>
             <Grid container item xs={12} sm={6} justify="center" className="bg">
               <Comments comments={comments} getPaginationComments={getPaginationComments} pagination={pagination}/>
+              <AddComment idRecipe={id} setComments={setComments}/>
             </Grid>
           </LayoutLoading>
         </Grid>
