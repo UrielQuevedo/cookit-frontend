@@ -5,3 +5,5 @@ const URL_BASE = 'auth';
 export const loginSocial = data => API.post(`${URL_BASE}/login/social`, data);
 
 export const me = () => API.get('users');
+
+export const registerRequest = data => API.post(`${URL_BASE}/register`, data);
