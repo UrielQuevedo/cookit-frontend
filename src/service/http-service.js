@@ -3,7 +3,7 @@ import axios from 'axios';
 const baseURL = process.env.REACT_APP_API_URL;
 
 const getToken = url => {
-  if (url === 'auth/login/social') {
+  if (url === 'auth/login/social' || url === 'auth/register') {
     return {};
   }
   const token = localStorage.getItem('authorization');

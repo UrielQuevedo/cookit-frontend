@@ -5,6 +5,7 @@ import VisibilityOffIcon from "@material-ui/icons/VisibilityOff";
 import { Alert } from '@material-ui/lab';
 import { useForm } from 'react-hook-form';
 import { Link, useHistory } from 'react-router-dom';
+import { registerRequest } from '../../service/auth-service';
 
 const Register = () => {
 
@@ -18,8 +19,14 @@ const Register = () => {
     if (data.password === data.password_confirmed) {
       setLoading(true);
       try {
-     //   const _ = await registerRequest(data);
-        push('/login/location');
+        const sendData = {
+            email: data.email,
+            name: data.name,
+            lastname: data.lastname,
+            password: data.password
+        };
+        const _ = await registerRequest(sendData);
+        push('/login');
       } catch (error) {
         console.log(error.response.data.message);
       }
