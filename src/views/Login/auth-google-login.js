@@ -31,10 +31,10 @@ const AuthGoogleLogin = () => {
   };
 
   return (
-    <Grid container justify="center" style={{ marginBottom: '20px' }}>
+    <Grid container justify="center" style={{ marginBottom: '30px' }}>
       <GoogleLogin
         clientId={clientId}
-        buttonText="Continuar con Google"
+        buttonText="Iniciar sesión con Google"
         onSuccess={responseGoogle}
         onFailure={responseGoogle}
         cookiePolicy={'single_host_origin'}

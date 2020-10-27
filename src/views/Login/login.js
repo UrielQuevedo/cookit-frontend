@@ -1,23 +1,49 @@
-import React, { useState } from 'react';
-import {
-  Box,
-  Button,
-  Checkbox,
-  CssBaseline,
-  FormControlLabel,
-  Grid,
-  IconButton,
-  InputAdornment,
-  TextField,
-  Typography
-} from '@material-ui/core';
+import React, { useState, useContext } from 'react';
+import { useHistory } from 'react-router-dom';
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
 import { Link } from 'react-router-dom';
 import AuthGoogleLogin from './auth-google-login';
+import { login } from '../../service/auth-service';
+import { AuthContext } from '../../context/auth-context';
+import { useForm } from 'react-hook-form';
+import { ChefHutSpinner } from '../../components/spinner';
+import {
+  Box,
+  Button,
+  CssBaseline,
+  Grid,
+  IconButton,
+  InputAdornment,
+  TextField,
+  Typography,
+} from '@material-ui/core';
+import { Alert } from '@material-ui/lab';
 import '../Login/Login.css';
+
 const Login = () => {
-  const [showPassword, setShowPassword] = useState(false);
+
+  const [ loading, setLoading  ] = useState(false);
+  const [ showPassword, setShowPassword ] = useState(false);
+  const { register, handleSubmit } = useForm();
+  const [ error, setError ] = useState();
+  const { setAuth } = useContext(AuthContext);
+  const { push } = useHistory();
+
+  const sendLoginForm = async (data, e) => {
+    setLoading(true);
+    try {
+      const userData = await login(data);
+      localStorage.setItem('authorization', userData.token);
+      setAuth({ type:'LOG_IN', isRemember:true, id: userData.id });
+      push('/');
+    } catch (error) {
+      console.log(error.response.data.message)
+      setError(error.response.data.message);
+    }
+    setLoading(false);
+    e.target.reset();
+  }
 
   return (
     <Grid container justify="center">
@@ -40,9 +66,10 @@ const Login = () => {
           <Typography component="h2" align="center" variant="h3">
             Iniciar Sesión
           </Typography>
-          <form>
+          <form onSubmit={handleSubmit(sendLoginForm)}>
             <TextField
               margin="normal"
+              inputRef={register}
               fullWidth
               required
               label="Correo Electronico"
@@ -53,6 +80,7 @@ const Login = () => {
             />
             <TextField
               margin="normal"
+              inputRef={register}
               fullWidth
               required
               label="Contraseña"
@@ -77,22 +105,21 @@ const Login = () => {
                 )
               }}
             />
-            <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Recordarme"
-              style={{ marginTop: '15px' }}
-            />
+            { error && <Alert variant="filled" severity="error" style={{ marginTop:'15px' }}>{error}</Alert> }
             <Box style={{ position: 'relative' }}>
               <Button
                 type="submit"
                 fullWidth
                 variant="contained"
                 color="primary"
+                disabled={loading}
                 style={{ margin: '20px 0 0 0' }}
               >
                 Iniciar sesión
               </Button>
             </Box>
+
+            { loading && <ChefHutSpinner style={{ position:'absolute', top:'50%', left:'50%', marginLeft:'-12px', marginTop:'-12px'  }} size={24} /> }
 
             <Grid container justify="center" style={{ fontSize: '20px' }}>
               <p>o</p>
