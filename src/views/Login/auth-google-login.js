@@ -31,7 +31,7 @@ const AuthGoogleLogin = () => {
   };
 
   return (
-    <Grid container justify="center" style={{ marginBottom: '30px' }}>
+    <Grid container justify="center" style={{ paddingBottom: '20px'}}>
       <GoogleLogin
         clientId={clientId}
         buttonText="Iniciar sesión con Google"

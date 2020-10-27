@@ -1,8 +1,7 @@
 import React, { useState, useContext } from 'react';
-import { useHistory } from 'react-router-dom';
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import AuthGoogleLogin from './auth-google-login';
 import { login } from '../../service/auth-service';
 import { AuthContext } from '../../context/auth-context';
@@ -121,11 +120,15 @@ const Login = () => {
 
             { loading && <ChefHutSpinner style={{ position:'absolute', top:'50%', left:'50%', marginLeft:'-12px', marginTop:'-12px'  }} size={24} /> }
 
-            <Grid container justify="center" style={{ fontSize: '20px' }}>
-              <p>o</p>
+            <Grid item xs={12} style={{ marginTop: '10px' }}>
+              <div style={{ textAlign: 'center' }}>
+                O
+              </div>
             </Grid>
 
-            <AuthGoogleLogin />
+            <Grid item={12}>
+              <AuthGoogleLogin />
+            </Grid>
 
             <Grid container justify="center" style={{ marginBottom: '20px' }}>
               <div>
