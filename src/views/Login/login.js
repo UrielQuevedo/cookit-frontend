@@ -37,7 +37,7 @@ const Login = () => {
       setAuth({ type:'LOG_IN', isRemember:true, id: userData.id });
       push('/');
     } catch (error) {
-      console.log(error.response.data.message)
+      console.log(error.response);
       setError(error.response.data.message);
     }
     setLoading(false);

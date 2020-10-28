@@ -24,7 +24,7 @@ const apiRequest = (method, url, data, parameters) =>
   })
     .then(response => response.data)
     // eslint-disable-next-line no-console
-    .catch(error => console.log(error.response));
+    .catch(error => error.response);
 
 const get = (url, parameters = {}) => apiRequest('get', url, {}, parameters);
 const post = (url, data = {}) => apiRequest('post', url, data, {});
