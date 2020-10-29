@@ -1,23 +1,54 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import VisibilityIcon from '@material-ui/icons/Visibility';
+import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
+import { Link, useHistory } from 'react-router-dom';
+import AuthGoogleLogin from './auth-google-login';
+import { login } from '../../service/auth-service';
+import { AuthContext } from '../../context/auth-context';
+import { useForm } from 'react-hook-form';
+import { ChefHutSpinner } from '../../components/spinner';
 import {
   Box,
   Button,
-  Checkbox,
   CssBaseline,
-  FormControlLabel,
   Grid,
   IconButton,
   InputAdornment,
   TextField,
-  Typography
+  Typography,
+  CircularProgress
 } from '@material-ui/core';
-import VisibilityIcon from '@material-ui/icons/Visibility';
-import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
-import { Link } from 'react-router-dom';
-import AuthGoogleLogin from './auth-google-login';
+import { Alert } from '@material-ui/lab';
 import '../Login/Login.css';
+
 const Login = () => {
-  const [showPassword, setShowPassword] = useState(false);
+
+  const [ loading, setLoading  ] = useState(false);
+  const [ showPassword, setShowPassword ] = useState(false);
+  const { register, handleSubmit } = useForm();
+  const [ error, setError ] = useState();
+  const { setAuth } = useContext(AuthContext);
+  const { push } = useHistory();
+
+  const sendLoginForm = async (data, e) => {
+    setLoading(true);
+    const response = await login(data);
+    checkStatusAndRedirect(response);    
+    setLoading(false);
+    e.target.reset();
+  }
+
+  const checkStatusAndRedirect = response => {
+    console.log(response);
+    if(response.status == 409 || response.status == 404) {
+      setError(response.data.message);
+    } else {
+      debugger;
+      localStorage.setItem('authorization', response.token);
+      setAuth({ type:'LOG_IN', isRemember:true, id: response.id });
+      push('/');          
+    }
+  }
 
   return (
     <Grid container justify="center">
@@ -40,9 +71,10 @@ const Login = () => {
           <Typography component="h2" align="center" variant="h3">
             Iniciar Sesión
           </Typography>
-          <form>
+          <form onSubmit={handleSubmit(sendLoginForm)}>
             <TextField
               margin="normal"
+              inputRef={register}
               fullWidth
               required
               label="Correo Electronico"
@@ -53,6 +85,7 @@ const Login = () => {
             />
             <TextField
               margin="normal"
+              inputRef={register}
               fullWidth
               required
               label="Contraseña"
@@ -77,28 +110,30 @@ const Login = () => {
                 )
               }}
             />
-            <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Recordarme"
-              style={{ marginTop: '15px' }}
-            />
+            { error && <Alert variant="filled" severity="error" style={{ marginTop:'15px' }}>{error}</Alert> }
             <Box style={{ position: 'relative' }}>
               <Button
                 type="submit"
                 fullWidth
                 variant="contained"
                 color="primary"
-                style={{ margin: '20px 0 0 0' }}
+                disabled={loading}
+                style={{ margin: '20px 0 20px 0' }}
               >
                 Iniciar sesión
               </Button>
+              { loading && <CircularProgress style={{ position:'absolute', top:'50%', left:'50%', marginLeft:'-12px', marginTop:'-12px'  }} size={24} /> }
             </Box>
 
-            <Grid container justify="center" style={{ fontSize: '20px' }}>
-              <p>o</p>
+            <Grid item xs={12} style={{ marginTop: '10px' }}>
+              <div style={{ textAlign: 'center' }}>
+                O
+              </div>
             </Grid>
 
-            <AuthGoogleLogin />
+            <Grid item={12}>
+              <AuthGoogleLogin />
+            </Grid>
 
             <Grid container justify="center" style={{ marginBottom: '20px' }}>
               <div>

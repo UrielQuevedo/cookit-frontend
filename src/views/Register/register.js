@@ -17,24 +17,28 @@ const Register = () => {
 
   const sendRegisterForm = async (data, e) => {
     if (data.password === data.password_confirmed) {
-      setLoading(true);
-      try {
-        const sendData = {
-            email: data.email,
-            name: data.name,
-            lastname: data.lastname,
-            password: data.password
-        };
-        const _ = await registerRequest(sendData);
-        push('/login');
-      } catch (error) {
-        console.log(error.response.data.message);
-      }
+    setLoading(true)
+      const sendData = {
+          email: data.email,
+          name: data.name,
+          lastname: data.lastname,
+          password: data.password
+      };
+      const response = await registerRequest(sendData);
+      checkStatusAndRedirect(response);
       setLoading(false);
     } else {
       setError('Las contraseñas no coinciden');
     }
     e.target.reset();
+  }
+
+  const checkStatusAndRedirect = response => {
+    if(response.status == 409) {
+      setError(response.data.message);
+    } else {
+      push('/login');          
+    }
   }
 
   return (

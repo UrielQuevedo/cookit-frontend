@@ -3,7 +3,7 @@ import axios from 'axios';
 const baseURL = process.env.REACT_APP_API_URL;
 
 const getToken = url => {
-  if (url === 'auth/login/social' || url === 'auth/register') {
+  if (url === 'auth/login/social' || url === 'auth/register' || url === 'auth/login') {
     return {};
   }
   const token = localStorage.getItem('authorization');
@@ -24,7 +24,7 @@ const apiRequest = (method, url, data, parameters) =>
   })
     .then(response => response.data)
     // eslint-disable-next-line no-console
-    .catch(error => console.log(error.response));
+    .catch(error => error.response);
 
 const get = (url, parameters = {}) => apiRequest('get', url, {}, parameters);
 const post = (url, data = {}) => apiRequest('post', url, data, {});
