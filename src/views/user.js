@@ -5,7 +5,8 @@ import {
   Paper,
   Tab,
   Tabs,
-  Typography
+  Typography,
+  Avatar
 } from '@material-ui/core';
 import CardRecipe from 'components/CardRecipe/card-recipe';
 import Follows from 'components/Dialog/Follows';
@@ -81,11 +82,21 @@ const User = () => {
       <Grid container xs={12} justify="center">
         <Grid container item sm={8} xs={12} justify="center">
           <Grid item sm={2} xs={12} container justify="center">
-            <img
-              src={imageUrl}
-              style={{ width: '125px', height: '125px', borderRadius: '65px' }}
-              alt="foto de perfil del usuario"
-            />
+            {imageUrl ? (
+                <img
+                  src={imageUrl}
+                  style={{ width: '125px', height: '125px', borderRadius: '65px' }}
+                  alt="foto de perfil del usuario"
+                />
+            ) : (
+              <Avatar
+                aria-label="recipe"
+                className="cardRecipe-avatar"
+                style={{ width: '125px', height: '125px', borderRadius: '65px', background: 'red', fontSize: '70px' }}
+              >
+                {`${name[0]}${lastname[0]}`}
+              </Avatar>
+            )}
           </Grid>
           <Grid
             item
