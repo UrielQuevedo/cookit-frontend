@@ -16,6 +16,7 @@ import {
   InputAdornment,
   TextField,
   Typography,
+  CircularProgress
 } from '@material-ui/core';
 import { Alert } from '@material-ui/lab';
 import '../Login/Login.css';
@@ -117,13 +118,12 @@ const Login = () => {
                 variant="contained"
                 color="primary"
                 disabled={loading}
-                style={{ margin: '20px 0 0 0' }}
+                style={{ margin: '20px 0 20px 0' }}
               >
                 Iniciar sesión
               </Button>
+              { loading && <CircularProgress style={{ position:'absolute', top:'50%', left:'50%', marginLeft:'-12px', marginTop:'-12px'  }} size={24} /> }
             </Box>
-
-            { loading && <ChefHutSpinner style={{ position:'absolute', top:'50%', left:'50%', marginLeft:'-12px', marginTop:'-12px'  }} size={24} /> }
 
             <Grid item xs={12} style={{ marginTop: '10px' }}>
               <div style={{ textAlign: 'center' }}>
