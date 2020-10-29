@@ -31,17 +31,22 @@ const Login = () => {
 
   const sendLoginForm = async (data, e) => {
     setLoading(true);
-    try {
-      const userData = await login(data);
-      localStorage.setItem('authorization', userData.token);
-      setAuth({ type:'LOG_IN', isRemember:true, id: userData.id });
-      push('/');
-    } catch (error) {
-      console.log(error.response);
-      setError(error.response.data.message);
-    }
+    const response = await login(data);
+    checkStatusAndRedirect(response);    
     setLoading(false);
     e.target.reset();
+  }
+
+  const checkStatusAndRedirect = response => {
+    console.log(response);
+    if(response.status == 409 || response.status == 404) {
+      setError(response.data.message);
+    } else {
+      debugger;
+      localStorage.setItem('authorization', response.token);
+      setAuth({ type:'LOG_IN', isRemember:true, id: response.id });
+      push('/');          
+    }
   }
 
   return (
