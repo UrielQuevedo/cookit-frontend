@@ -38,6 +38,7 @@ const User = () => {
   const [openModal, setOpenModal] = useState(false);
   const [modalContent, setModalContent] = useState([]);
   const [modalType, setModalType] = useState();
+  const [_recipes, setRecipes] = useState(recipes);
   const { push } = useHistory();
 
   const changeStep = (event, newValue) => {
@@ -112,7 +113,7 @@ const User = () => {
             </Typography>
             <Typography variant="subtitle1">{email}</Typography>
             <Grid item>
-              <span className="count-recipes">{recipes?.length} recetas</span>
+              <span className="count-recipes">{_recipes?.length} recetas</span>
               <Button onClick={openFollowers}>
                 {followers?.length} {FOLLOWERS_TITLE}
               </Button>
@@ -148,9 +149,9 @@ const User = () => {
         </Paper>
       </Grid>
       <Grid container justify="center" spacing={3}>
-        {((step === 1 ? favorites : recipes) || []).map((recipe, i) => (
+        {((step === 1 ? favorites : _recipes) || []).map((recipe, i) => (
           <Grid key={i} item xs={12} sm={3} style={{ marginBottom: '20px' }}>
-            <CardRecipe {...recipe} />
+            <CardRecipe recipe={recipe} setRecipes={setRecipes} />
           </Grid>
         ))}
       </Grid>

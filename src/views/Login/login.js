@@ -40,7 +40,7 @@ const Login = () => {
 
   const checkStatusAndRedirect = response => {
     console.log(response);
-    if(response.status == 409 || response.status == 404) {
+    if(response.status === 409 || response.status === 404) {
       setError(response.data.message);
     } else {
       debugger;
