@@ -19,11 +19,12 @@ import Alert from '@material-ui/lab/Alert';
 import AvatarImage from 'components/User/avatar-image';
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
+import DeleteRecipe from '../Dialog/delete-recipe';
 
 const TEXT_LIMIT = 150;
 const MESSAGE_FAVORITE_SUCCESSFUL = 'Se agrego correctamente a favoritos';
 
-const CardRecipe = recipe => {
+const CardRecipe = ({ recipe, setRecipes }) => {
   const { imageUrl, description, created_at, name, id, user } = recipe;
   const { push } = useHistory();
   const value = useTimeAgo(new Date(created_at));
@@ -120,9 +121,7 @@ const CardRecipe = recipe => {
                 <IconButton aria-label="add to favorites">
                   <EditIcon />
                 </IconButton>
-                <IconButton aria-label="add to favorites">
-                  <DeleteIcon />
-                </IconButton>
+                <DeleteRecipe idRecipe={id} setRecipes={setRecipes}/>
               </>
             )}
           </CardActions>
