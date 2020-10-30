@@ -69,6 +69,7 @@ const Home = () => {
 
   return (
     <Container className={classes.root}>
+      {console.log("home")}
       <SearchHeader />
       <Grid container justify="center" direction="column">
         <Grid
@@ -107,7 +108,7 @@ const Home = () => {
         <Grid container justify="center" spacing={3}>
           {recipes.map((recipe, i) => (
             <Grid key={i} item xs={12} sm={3} style={{ marginBottom: '20px' }}>
-              <CardRecipe {...recipe} />
+              <CardRecipe recipe={recipe} setRecipes={setRecipes}/>
               {i + 1 === recipes.length && (
                 <InfiniteScroll
                   handleScroll={getPaginationRecipes}
