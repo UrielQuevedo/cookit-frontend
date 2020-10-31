@@ -41,7 +41,9 @@ const New = () => {
       userId: user.id,
       ingredients,
       steps: stepsRecipes
-    }).then(() => sucessfullNewRecipe());
+    })
+      .then(() => sucessfullNewRecipe())
+      .catch(error => console.log(error.response));
     event.target.reset();
   };
 
