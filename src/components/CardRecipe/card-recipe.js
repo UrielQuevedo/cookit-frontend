@@ -121,7 +121,7 @@ const CardRecipe = ({ recipe, setRecipes }) => {
                 <IconButton aria-label="add to favorites">
                   <EditIcon />
                 </IconButton>
-                <DeleteRecipe idRecipe={id} setRecipes={setRecipes}/>
+                <DeleteRecipe idRecipe={id} setRecipes={setRecipes} />
               </>
             )}
           </CardActions>

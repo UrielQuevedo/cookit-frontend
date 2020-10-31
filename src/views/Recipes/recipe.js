@@ -26,11 +26,11 @@ const Recipe = () => {
     description,
     imageUrl,
     comensales,
-    
+
     ingredients,
     steps,
     time,
-    user,
+    user
   } = recipe;
   const [lastComment, setLastComment] = useState(null);
   const [commentsSize, setCommentsSize] = useState(0);
@@ -53,11 +53,11 @@ const Recipe = () => {
     push({
       pathname: `/recipes/${id}/comments`,
       state: {
-          recipeName: name,
-          recipeImageUrl: imageUrl
-        }
-      })
-  }
+        recipeName: name,
+        recipeImageUrl: imageUrl
+      }
+    });
+  };
 
   return (
     <Grid container justify="center">
@@ -83,14 +83,14 @@ const Recipe = () => {
           <Grid item xs={12} className="plr-20">
             <Divider className="height mb-20" />
             <SectionTitle title={`${TITLE} (${commentsSize})`} />
-            {lastComment 
-              && <Link onClick={goToPageComments} color='textSecondary'>
-                  Ver todos los comentarios
-                 </Link> 
-            }
+            {lastComment && (
+              <Link onClick={goToPageComments} color="textSecondary">
+                Ver todos los comentarios
+              </Link>
+            )}
           </Grid>
           <Grid item xs={12}>
-            {lastComment && <Comment comment={lastComment}/>}
+            {lastComment && <Comment comment={lastComment} />}
             <AddComment
               data-testid="add-comment"
               idRecipe={id}

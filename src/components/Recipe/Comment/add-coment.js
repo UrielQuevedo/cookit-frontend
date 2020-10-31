@@ -13,7 +13,13 @@ import AvatarImage from 'components/User/avatar-image';
 
 const TEXT_COMMENT_LIMIT = 200;
 
-const AddComment = ({ idRecipe, setLastComment, setCommentsSize, onSubmit = null, setComments }) => {
+const AddComment = ({
+  idRecipe,
+  setLastComment,
+  setCommentsSize,
+  onSubmit = null,
+  setComments
+}) => {
   const [comment, setComment] = useState('');
   const { user } = useContext(UserContext);
   const { name, lastname, imageUrl, id } = user;
@@ -36,20 +42,21 @@ const AddComment = ({ idRecipe, setLastComment, setCommentsSize, onSubmit = null
         idUser: id
       };
       postNewComment(request).then(newComment => {
-        if(setComments != null) { 
+        if (setComments != null) {
           setComments(comments_ => {
             let result = comments_.map(comment => comment);
             result.push(newComment);
             return result;
-          })
+          });
         } else {
-            setLastComment(newComment);
-            setCommentsSize(oldCommentsSize => oldCommentsSize + 1);
+          setLastComment(null);
+          setLastComment(newComment);
+          setCommentsSize(oldCommentsSize => oldCommentsSize + 1);
         }
-      })
-      }
-      setCount(TEXT_COMMENT_LIMIT);
-      event.target.reset();
+      });
+    }
+    setCount(TEXT_COMMENT_LIMIT);
+    event.target.reset();
   };
 
   return (

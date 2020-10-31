@@ -31,17 +31,17 @@ const Search = () => {
   const [loading, setLoading] = useState(true);
   const [pagination, setPagination] = useState({
     page: 0,
-    size: 2,
+    size: 10,
     totalPages: 1,
     totalElements: '?'
   });
   const query = new URLSearchParams(window.location.search);
   const search = query.get('search');
 
-  const getPaginationRecipes = async () => {
+  const getPaginationRecipes = async page_ => {
     const { size, page } = pagination;
     const { content, totalElements, totalPages, number } = await getAllRecipes({
-      page,
+      page: page_ === 0 ? page_ : page,
       size,
       search
     });
@@ -58,7 +58,7 @@ const Search = () => {
   useEffect(() => {
     setLoading(true);
     setPagination(pagination_ => ({ ...pagination_, page: 0 }));
-    getPaginationRecipes();
+    getPaginationRecipes(0);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [search]);
 
@@ -81,7 +81,7 @@ const Search = () => {
           </Grid>
           {recipes.map((recipe, i) => (
             <Grid item key={i} xs={12} sm={3} style={{ marginBottom: '20px' }}>
-              <CardRecipe {...recipe} />
+              <CardRecipe recipe={recipe} />
             </Grid>
           ))}
         </Grid>

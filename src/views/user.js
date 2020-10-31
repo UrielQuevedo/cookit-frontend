@@ -46,7 +46,10 @@ const User = () => {
   };
 
   useEffect(() => {
-    me().then(myUser => setUser(myUser));
+    me().then(myUser => {
+      setUser(myUser);
+      setRecipes(myUser.recipes);
+    });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -84,16 +87,26 @@ const User = () => {
         <Grid container item sm={8} xs={12} justify="center">
           <Grid item sm={2} xs={12} container justify="center">
             {imageUrl ? (
-                <img
-                  src={imageUrl}
-                  style={{ width: '125px', height: '125px', borderRadius: '65px' }}
-                  alt="foto de perfil del usuario"
-                />
+              <img
+                src={imageUrl}
+                style={{
+                  width: '125px',
+                  height: '125px',
+                  borderRadius: '65px'
+                }}
+                alt="foto de perfil del usuario"
+              />
             ) : (
               <Avatar
                 aria-label="recipe"
                 className="cardRecipe-avatar"
-                style={{ width: '125px', height: '125px', borderRadius: '65px', background: 'red', fontSize: '70px' }}
+                style={{
+                  width: '125px',
+                  height: '125px',
+                  borderRadius: '65px',
+                  background: 'red',
+                  fontSize: '70px'
+                }}
               >
                 {`${name[0]}${lastname[0]}`}
               </Avatar>

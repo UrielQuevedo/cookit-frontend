@@ -11,6 +11,10 @@ export const postNewComment = comment =>
 
 export const getRecipe = id => API.get(`${URL_BASE}/${id}`);
 
-export const getComments = (idRecipe, parameters) => API.get(`${URL_BASE}/${idRecipe}/comments`, parameters);
+export const getComments = (idRecipe, parameters) =>
+  API.get(`${URL_BASE}/${idRecipe}/comments`, parameters);
 
 export const deleteRecipeById = id => API.remove(`${URL_BASE}/${id}`);
+
+export const getAllFollowersRecipes = id =>
+  API.get(`${URL_BASE}/followers/${id}?sort=name&name.dir=desc`);
