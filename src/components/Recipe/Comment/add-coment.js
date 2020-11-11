@@ -21,8 +21,7 @@ const AddComment = ({
   setComments
 }) => {
   const [comment, setComment] = useState('');
-  const { user } = useContext(UserContext);
-  const { name, lastname, imageUrl, id } = user;
+  const userData = useContext(UserContext);
   const [count, setCount] = useState(TEXT_COMMENT_LIMIT);
 
   const handleInput = event => {
@@ -39,7 +38,7 @@ const AddComment = ({
       const request = {
         message: comment,
         idRecipe,
-        idUser: id
+        idUser: userData.user.id
       };
       postNewComment(request).then(newComment => {
         if (setComments != null) {
@@ -49,14 +48,14 @@ const AddComment = ({
             return result;
           });
         } else {
-          setLastComment(null);
+          setLastComment(null); 
           setLastComment(newComment);
           setCommentsSize(oldCommentsSize => oldCommentsSize + 1);
         }
       });
+      setCount(TEXT_COMMENT_LIMIT);
+      event.target.reset();
     }
-    setCount(TEXT_COMMENT_LIMIT);
-    event.target.reset();
   };
 
   return (
@@ -75,7 +74,7 @@ const AddComment = ({
         direction="column"
         alignItems="center"
       >
-        <AvatarImage name={name} lastname={lastname} imageUrl={imageUrl} />
+        { userData && <AvatarImage name={userData.user.name} lastname={userData.user.lastname} imageUrl={userData.user.imageUrl} /> }
         {count < 50 ? (
           <p style={{ color: 'red' }}>{count}</p>
         ) : (
