@@ -39,11 +39,9 @@ const Login = () => {
   }
 
   const checkStatusAndRedirect = response => {
-    console.log(response);
     if(response.status === 409 || response.status === 404) {
       setError(response.data.message);
     } else {
-      debugger;
       localStorage.setItem('authorization', response.token);
       setAuth({ type:'LOG_IN', isRemember:true, id: response.id });
       push('/');          
@@ -71,7 +69,7 @@ const Login = () => {
           <Typography component="h2" align="center" variant="h3">
             Iniciar Sesión
           </Typography>
-          <form onSubmit={handleSubmit(sendLoginForm)}>
+          <form onSubmit={handleSubmit(sendLoginForm)} data-testid="login-form">
             <TextField
               margin="normal"
               inputRef={register}
@@ -110,7 +108,7 @@ const Login = () => {
                 )
               }}
             />
-            { error && <Alert variant="filled" severity="error" style={{ marginTop:'15px' }}>{error}</Alert> }
+            { error && <Alert data-testid="login-error" variant="filled" severity="error" style={{ marginTop:'15px' }}>{error}</Alert> }
             <Box style={{ position: 'relative' }}>
               <Button
                 type="submit"
