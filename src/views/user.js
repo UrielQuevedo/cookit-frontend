@@ -134,6 +134,9 @@ const User = () => {
                 {followeds?.length} {FOLLOWEDS_TITLE}
               </Button>
             </Grid>
+            <Button color="primary" onClick={logOut}>
+                Cerrar sesión
+            </Button>
           </Grid>
           <Grid
             item
@@ -164,6 +167,7 @@ const User = () => {
       <Grid container justify="center" spacing={3}>
         {((step === 1 ? favorites : _recipes) || []).map((recipe, i) => (
           <Grid key={i} item xs={12} sm={3} style={{ marginBottom: '20px' }}>
+            {console.log(recipe)}
             <CardRecipe recipe={recipe} setRecipes={setRecipes} />
           </Grid>
         ))}
