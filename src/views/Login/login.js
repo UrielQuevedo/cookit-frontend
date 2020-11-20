@@ -4,8 +4,7 @@ import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
 import { Link, useHistory } from 'react-router-dom';
 import AuthGoogleLogin from './auth-google-login';
 import { login } from '../../service/auth-service';
-import { AuthContext } from '../../context/auth-context';
-import { useForm } from 'react-hook-form';
+import { useAuthContext } from '../../context/auth-context';
 import { ChefHutSpinner } from '../../components/spinner';
 import {
   Box,
@@ -23,26 +22,30 @@ import '../Login/Login.css';
 
 const Login = () => {
 
-  const [ loading, setLoading  ] = useState(false);
-  const [ showPassword, setShowPassword ] = useState(false);
-  const { register, handleSubmit } = useForm();
-  const [ error, setError ] = useState();
-  const { setAuth } = useContext(AuthContext);
+  const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const [error, setError] = useState();
+  const { setAuth } = useAuthContext();
   const { push } = useHistory();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
-  const sendLoginForm = async (data, e) => {
+  const sendLoginForm = async (event) => {
+    event.preventDefault();
     setLoading(true);
+
     try {
-      const response = await login(data);
+      const response = await login({ email, password});
       localStorage.setItem('authorization', response.token);
-      setAuth({ type:'LOG_IN', isRemember:true, id: response.id });
-      push('/');      
+      setAuth({ type: 'LOG_IN', isRemember: true, id: response.id });
+      push('/');
+      event.target.reset();
     }
     catch (e) {
       setError(e.message);
     }
-    setLoading(false);
-    e.target.reset();
+
+    setLoading(false);  
   }
 
   return (
@@ -66,10 +69,10 @@ const Login = () => {
           <Typography component="h2" align="center" variant="h3">
             Iniciar Sesión
           </Typography>
-          <form onSubmit={handleSubmit(sendLoginForm)} data-testid="login-form">
+          <form onSubmit={sendLoginForm} data-testid="login-form">
             <TextField
+              onChange={e => setEmail(e.target.value)}
               margin="normal"
-              inputRef={register}
               fullWidth
               required
               label="Correo Electronico"
@@ -79,8 +82,8 @@ const Login = () => {
               autoComplete="email"
             />
             <TextField
+              onChange={e => setPassword(e.target.value)}
               margin="normal"
-              inputRef={register}
               fullWidth
               required
               label="Contraseña"
@@ -98,14 +101,14 @@ const Login = () => {
                       {showPassword ? (
                         <VisibilityOffIcon />
                       ) : (
-                        <VisibilityIcon />
-                      )}
+                          <VisibilityIcon />
+                        )}
                     </IconButton>
                   </InputAdornment>
                 )
               }}
             />
-            { error && <Alert data-testid="login-error" variant="filled" severity="error" style={{ marginTop:'15px' }}>{error}</Alert> }
+            {error && <Alert data-testid="login-error" variant="filled" severity="error" style={{ marginTop: '15px' }}>{error}</Alert>}
             <Box style={{ position: 'relative' }}>
               <Button
                 type="submit"
@@ -117,7 +120,7 @@ const Login = () => {
               >
                 Iniciar sesión
               </Button>
-              { loading && <CircularProgress style={{ position:'absolute', top:'50%', left:'50%', marginLeft:'-12px', marginTop:'-12px'  }} size={24} /> }
+              {loading && <CircularProgress style={{ position: 'absolute', top: '50%', left: '50%', marginLeft: '-12px', marginTop: '-12px' }} size={24} />}
             </Box>
 
             <Grid item xs={12} style={{ marginTop: '10px' }}>
