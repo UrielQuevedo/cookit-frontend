@@ -1,4 +1,4 @@
-import React, { useState, createContext, useEffect } from 'react';
+import React, { useState, createContext, useEffect, useContext } from 'react';
 import PropTypes from 'prop-types';
 import { useHistory } from 'react-router';
 
@@ -48,6 +48,8 @@ const checkAuth = async setAuthState => {
 };
 
 export const AuthContext = createContext();
+
+export const useAuthContext = () => useContext(AuthContext);
 
 const useAuth = () => {
   const [authState, setAuthState] = useState(null);

@@ -28,7 +28,6 @@ const EditUser = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
-  const [files, setFiles] = useState([]);
   const { push } = useHistory();
 
   useEffect(() => {
@@ -45,7 +44,6 @@ const EditUser = () => {
   const sendEditUser = async (event) => {
     event.preventDefault();
     setLoading(true);
-    console.log(userToEdit);
 
     try {
       const _ = await putEditUser(userToEdit);
