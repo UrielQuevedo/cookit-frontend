@@ -81,6 +81,10 @@ const User = () => {
     setModalContent(filter);
   };
 
+  const goToEditUser = () => {
+    push('/profile/edit');
+  };
+
   return (
     <Container style={{ marginTop: '40px' }}>
       <Grid container xs={12} justify="center">
@@ -134,7 +138,10 @@ const User = () => {
                 {followeds?.length} {FOLLOWEDS_TITLE}
               </Button>
             </Grid>
-            <Button color="primary" onClick={logOut}>
+            <Button variant="outlined" color="primary" onClick={goToEditUser}>
+                Editar perfil
+            </Button>
+            <Button variant="outlined" color="primary" onClick={logOut} style={{ marginTop: '10px' }}>
                 Cerrar sesión
             </Button>
           </Grid>

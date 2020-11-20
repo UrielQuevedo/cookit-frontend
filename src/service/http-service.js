@@ -29,11 +29,13 @@ const apiRequest = (method, url, data, parameters) =>
 const get = (url, parameters = {}) => apiRequest('get', url, {}, parameters);
 const post = (url, data = {}) => apiRequest('post', url, data, {});
 const remove = (url, data = {}) => apiRequest('delete', url, data, {});
+const put = (url, data = {}) => apiRequest('put', url, data, {});
 
 const API = {
   get,
   post,
-  remove
+  remove,
+  put
 };
 
 export default API;
