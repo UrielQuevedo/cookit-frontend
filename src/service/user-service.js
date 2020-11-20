@@ -5,8 +5,7 @@ const URL_BASE = 'users';
 export const postAddFavorite = (userId, recipeId) =>
   API.post(`${URL_BASE}/${userId}/favorites/${recipeId}`);
 
-export const editUser = user =>
-  API.put(`${URL_BASE}`, user);
+export const putEditUser = user => API.put(`${URL_BASE}`, user);
 
 export const deleteRecipeToFavorite = (userId, recipeId) =>
   API.remove(`${URL_BASE}/${userId}/favorites/${recipeId}`);

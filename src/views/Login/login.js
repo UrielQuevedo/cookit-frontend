@@ -32,20 +32,17 @@ const Login = () => {
 
   const sendLoginForm = async (data, e) => {
     setLoading(true);
-    const response = await login(data);
-    checkStatusAndRedirect(response);    
-    setLoading(false);
-    e.target.reset();
-  }
-
-  const checkStatusAndRedirect = response => {
-    if(response.status === 409 || response.status === 404) {
-      setError(response.data.message);
-    } else {
+    try {
+      const response = await login(data);
       localStorage.setItem('authorization', response.token);
       setAuth({ type:'LOG_IN', isRemember:true, id: response.id });
-      push('/');          
+      push('/');      
     }
+    catch (e) {
+      setError(e.message);
+    }
+    setLoading(false);
+    e.target.reset();
   }
 
   return (
