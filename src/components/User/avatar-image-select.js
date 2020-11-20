@@ -1,8 +1,10 @@
 import { Avatar } from '@material-ui/core';
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
 const AvatarImageSelect = ({ imageUrl, name, lastname, handleChangeUserValue }) => {
+ 
+  const [_imageUrl, setImageUrl] = useState(imageUrl);
 
   const readFile = () => {
       var file = document.querySelector('input[type=file]')['files'][0];
@@ -10,6 +12,9 @@ const AvatarImageSelect = ({ imageUrl, name, lastname, handleChangeUserValue }) 
       var baseString;
       reader.onloadend = function () {
           baseString = reader.result;
+          if (_imageUrl == null) {
+            setImageUrl(baseString);
+          }
           const imageUser = document.getElementById('imageUser')
           imageUser.src = baseString;
           handleChangeUserValue("imageUrl", baseString);
@@ -17,21 +22,19 @@ const AvatarImageSelect = ({ imageUrl, name, lastname, handleChangeUserValue }) 
       reader.readAsDataURL(file);
     }
    
-  
-
   const openDialog = () => {
     document.getElementById('openStorage').click();
   }
   
   return (
     <>
-      {imageUrl ? (
+      {_imageUrl ? (
         <div style={{ textAlign: 'center' }}>
           <input id='openStorage' type='file' name='filename' hidden onChange={readFile}/>
-          <button type="button" onClick={openDialog} style={{ border: 'none' }}>
+          <button type="button" onClick={openDialog} style={{ border: 'none', background: '#FD5252' }}>
             <img
               id='imageUser'
-              src={imageUrl}
+              src={_imageUrl}
               width="80"
               height="80"
               style={{ borderRadius: '20px' }}
@@ -43,12 +46,11 @@ const AvatarImageSelect = ({ imageUrl, name, lastname, handleChangeUserValue }) 
       ) : (
         <div style={{ textAlign: 'center' }}>
           <input id='openStorage' type='file' name='filename' hidden onChange={readFile}/>
-          <button type="button" onClick={openDialog} style={{ border: 'none' }}>
-            <Avatar
-              id='imageUser'
+          <button type="button" onClick={openDialog} style={{ border: 'none', background: '#FD5252' }}>
+              <Avatar
               aria-label="recipe"
-              className="cardRecipe-avatar"
-              style={{ background: 'red', width: '80px', heigth: '160px' }}
+              style={{ background: 'red', borderRadius: '20px', width: '80px', height: '80px' }}
+              
             >
               {`${name[0]}${lastname[0]}`}
             </Avatar>

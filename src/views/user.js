@@ -128,6 +128,7 @@ const User = () => {
             <Typography variant="h6">
               {name} {lastname}
             </Typography>
+            
             <Typography variant="subtitle1">{email}</Typography>
             <Grid item>
               <span className="count-recipes">{_recipes?.length} recetas</span>

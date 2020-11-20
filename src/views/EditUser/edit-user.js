@@ -104,18 +104,6 @@ const EditUser = () => {
     );
   }
 
-
-  const readFile = () => {
-    var file = document.querySelector('input[type=file]')['files'][0];
-    var reader = new FileReader();
-    var baseString;
-    reader.onloadend = function () {
-        baseString = reader.result;
-        handleChangeUserValue("imageUrl", baseString);
-    };
-    reader.readAsDataURL(file);
-}
-
 const settingView = () => {
   return (
     <Grid container item justify="center" style={{ padding: '10px' }}>
@@ -128,7 +116,7 @@ const settingView = () => {
           {customInput("Nombre", "text", "name")}
           {customInput("Apellido", "text", "lastname")}
 
-          {!user.isGoogleAccount && customInput("Nueva Contraseña", "password", "newPassword", "Ingresar contraseña")}
+          {!user.isGoogleAccount && customInput("Nueva Contraseña (Opcional)", "password", "newPassword", "Ingresar contraseña")}
           {!user.isGoogleAccount &&
             <div>
               <Divider style={{ background: '#ffff' }} variant="middle" />
@@ -151,6 +139,7 @@ const settingView = () => {
           <div>
             {error && <div style={{ color: '#ffff', display: 'flex', borderLeft: '3px solid #ffff' }}> <HighlightOffIcon style={{ color: '#ffff', margin: '0 5px 0 5px' }} />  {error}. </div>}
           </div>
+          
           <Grid container item justify="flex-end" style={{ marginBottom: '10px' }}>
             {loading && <CircularProgress size={28} style={{ color: '#ffff', marginRight: '15px', position: 'relative', top: '3px' }} />}
             <Button type="submit" variant="contained" color="primary">
