@@ -24,16 +24,18 @@ const apiRequest = (method, url, data, parameters) =>
   })
     .then(response => response.data)
     // eslint-disable-next-line no-console
-    .catch(error => error.response);
+    .catch(error => { throw new Error(error.response.data.message) });
 
 const get = (url, parameters = {}) => apiRequest('get', url, {}, parameters);
 const post = (url, data = {}) => apiRequest('post', url, data, {});
 const remove = (url, data = {}) => apiRequest('delete', url, data, {});
+const put = (url, data = {}) => apiRequest('put', url, data, {});
 
 const API = {
   get,
   post,
-  remove
+  remove,
+  put
 };
 
 export default API;
