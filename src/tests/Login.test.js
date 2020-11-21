@@ -4,7 +4,7 @@ import Adapter from 'enzyme-adapter-react-16';
 import { login } from '../service/auth-service';
 import Login from '../views/Login/login';
 import waitForExpect from 'wait-for-expect';
-import {act} from 'react-dom/test-utils'
+import { act } from 'react-dom/test-utils';
 import * as AuthContext from 'context/auth-context';
 
 configure({ adapter: new Adapter() });
@@ -16,22 +16,21 @@ jest.mock('react-router-dom', () => ({
   ...jest.requireActual('react-router-dom'),
   useHistory: () => ({
     push: jest.fn()
-  }),
+  })
 }));
 
 test('Un usuario no se logea correctamente', async () => {
-  
   login.mockImplementation(() => {
-    throw new Error("Los datos ingresados no coinciden")
-  })
+    throw new Error('Los datos ingresados no coinciden');
+  });
 
   const contextValues = {
     authState: jest.fn(),
     setAuth: jest.fn()
-  }
+  };
 
   jest
-    .spyOn(AuthContext, "useAuthContext")
+    .spyOn(AuthContext, 'useAuthContext')
     .mockImplementation(() => contextValues);
 
   const wrapper = shallow(<Login />);
@@ -43,12 +42,11 @@ test('Un usuario no se logea correctamente', async () => {
         reset: jest.fn()
       }
     });
-   })
+  });
 
-   await waitForExpect(() => {
+  await waitForExpect(() => {
     wrapper.update();
-    const error = wrapper.find({'data-testid': 'login-error' });
-    expect(error.text()).toBe("Los datos ingresados no coinciden");
-   }) 
-})
-
+    const error = wrapper.find({ 'data-testid': 'login-error' });
+    expect(error.text()).toBe('Los datos ingresados no coinciden');
+  });
+});
