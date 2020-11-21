@@ -9,13 +9,15 @@ import {
   Avatar
 } from '@material-ui/core';
 import CardRecipe from 'components/CardRecipe/card-recipe';
-import Follows from 'components/Dialog/Follows';
+import Follows from '../components/Dialog/Follows';
 import { UserContext } from 'context/user-context';
 import React, { useContext, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { me } from 'service/auth-service';
 import { deleteFollowUser } from 'service/user-service';
 import './User.css';
+import Favorites from 'components/Favorites/favorites';
+import { Alert } from '@material-ui/lab';
 
 const FOLLOWEDS_TITLE = 'seguidos';
 const FOLLOWERS_TITLE = 'seguidores';
@@ -128,9 +130,9 @@ const User = () => {
             <Typography variant="h6">
               {name} {lastname}
             </Typography>
-            
+
             <Typography variant="subtitle1">{email}</Typography>
-            <Grid item>
+            <Grid item style={{ marginBottom: '20px' }}>
               <span className="count-recipes">{_recipes?.length} recetas</span>
               <Button onClick={openFollowers}>
                 {followers?.length} {FOLLOWERS_TITLE}
@@ -140,10 +142,15 @@ const User = () => {
               </Button>
             </Grid>
             <Button variant="outlined" color="primary" onClick={goToEditUser}>
-                Editar perfil
+              Editar perfil
             </Button>
-            <Button variant="outlined" color="primary" onClick={logOut} style={{ marginTop: '10px' }}>
-                Cerrar sesión
+            <Button
+              variant="outlined"
+              color="primary"
+              onClick={logOut}
+              style={{ marginTop: '10px' }}
+            >
+              Cerrar sesión
             </Button>
           </Grid>
           <Grid
@@ -173,12 +180,26 @@ const User = () => {
         </Paper>
       </Grid>
       <Grid container justify="center" spacing={3}>
-        {((step === 1 ? favorites : _recipes) || []).map((recipe, i) => (
-          <Grid key={i} item xs={12} sm={3} style={{ marginBottom: '20px' }}>
-            {console.log(recipe)}
-            <CardRecipe recipe={recipe} setRecipes={setRecipes} />
-          </Grid>
-        ))}
+        {step === 1 ? (
+          <Favorites favorites={favorites} />
+        ) : (
+          <>
+            {(_recipes.length === 0 && (
+              <Alert color="warning">No publicaste ninguna receta.</Alert>
+            )) ||
+              _recipes.map((recipe, i) => (
+                <Grid
+                  key={i}
+                  item
+                  xs={12}
+                  sm={3}
+                  style={{ marginBottom: '20px' }}
+                >
+                  <CardRecipe recipe={recipe} setRecipes={setRecipes} />
+                </Grid>
+              ))}
+          </>
+        )}
       </Grid>
       <Follows
         openModal={openModal}

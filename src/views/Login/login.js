@@ -15,13 +15,13 @@ import {
   InputAdornment,
   TextField,
   Typography,
-  CircularProgress
+  CircularProgress,
+  Hidden
 } from '@material-ui/core';
 import { Alert } from '@material-ui/lab';
 import '../Login/Login.css';
 
 const Login = () => {
-
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState();
@@ -30,33 +30,34 @@ const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const sendLoginForm = async (event) => {
+  const sendLoginForm = async event => {
     event.preventDefault();
     setLoading(true);
 
     try {
-      const response = await login({ email, password});
+      const response = await login({ email, password });
       localStorage.setItem('authorization', response.token);
       setAuth({ type: 'LOG_IN', isRemember: true, id: response.id });
       push('/');
       event.target.reset();
-    }
-    catch (e) {
+    } catch (e) {
       setError(e.message);
     }
 
-    setLoading(false);  
-  }
+    setLoading(false);
+  };
 
   return (
-    <Grid container justify="center">
+    <Grid container justify="center" style={{ height: '100vh' }}>
       <CssBaseline />
       <Grid
-        container
         item
-        lg={3}
+        container
         direction="column"
         justify="center"
+        xs={12}
+        lg={6}
+        style={{ background: '#da4453' }}
         alignItems="center"
       >
         <Grid
@@ -64,6 +65,7 @@ const Login = () => {
           direction="column"
           justify="center"
           alignItems="center"
+          lg={6}
           className="login-box"
         >
           <Typography component="h2" align="center" variant="h3">
@@ -101,14 +103,23 @@ const Login = () => {
                       {showPassword ? (
                         <VisibilityOffIcon />
                       ) : (
-                          <VisibilityIcon />
-                        )}
+                        <VisibilityIcon />
+                      )}
                     </IconButton>
                   </InputAdornment>
                 )
               }}
             />
-            {error && <Alert data-testid="login-error" variant="filled" severity="error" style={{ marginTop: '15px' }}>{error}</Alert>}
+            {error && (
+              <Alert
+                data-testid="login-error"
+                variant="filled"
+                severity="error"
+                style={{ marginTop: '15px' }}
+              >
+                {error}
+              </Alert>
+            )}
             <Box style={{ position: 'relative' }}>
               <Button
                 type="submit"
@@ -120,13 +131,22 @@ const Login = () => {
               >
                 Iniciar sesión
               </Button>
-              {loading && <CircularProgress style={{ position: 'absolute', top: '50%', left: '50%', marginLeft: '-12px', marginTop: '-12px' }} size={24} />}
+              {loading && (
+                <CircularProgress
+                  style={{
+                    position: 'absolute',
+                    top: '50%',
+                    left: '50%',
+                    marginLeft: '-12px',
+                    marginTop: '-12px'
+                  }}
+                  size={24}
+                />
+              )}
             </Box>
 
             <Grid item xs={12} style={{ marginTop: '10px' }}>
-              <div style={{ textAlign: 'center' }}>
-                O
-              </div>
+              <div style={{ textAlign: 'center' }}>O</div>
             </Grid>
 
             <Grid item={12}>
@@ -144,6 +164,33 @@ const Login = () => {
           </form>
         </Grid>
       </Grid>
+      <Hidden mdDown>
+        <Grid
+          container
+          justify="center"
+          alignContent="center"
+          alignItems="center"
+          xs={6}
+          direction="column"
+        >
+          <img
+            src="/recetas.svg"
+            alt=""
+            height="40%"
+            style={{ marginTop: '6.5rem' }}
+          />
+          <h1
+            style={{
+              fontSize: '5rem',
+              marginTop: '2rem',
+              textAlign: 'center',
+              color: '#da4453'
+            }}
+          >
+            Cookit
+          </h1>
+        </Grid>
+      </Hidden>
     </Grid>
   );
 };

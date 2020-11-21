@@ -1,5 +1,5 @@
-import { Divider, Grid, Link } from '@material-ui/core';
-import React, { useEffect, useState } from 'react';
+import { Divider, Grid, IconButton, Link } from '@material-ui/core';
+import React, { useContext, useEffect, useState } from 'react';
 import RecipeDescription from 'components/Recipe/recipe-description';
 import UserInformation from 'components/Recipe/user-information';
 import Time from 'components/Recipe/time';
@@ -13,6 +13,8 @@ import { formatDateAndTime } from 'utils/format-date-time';
 import { ChefHutSpinner } from 'components/spinner';
 import SectionTitle from '../../components/Recipe/section-title';
 import Comment from '../../components/Recipe/Comment/card-comment';
+import EditIcon from '@material-ui/icons/Edit';
+import { UserContext } from 'context/user-context';
 
 const TITLE = 'Comentarios';
 
@@ -26,7 +28,6 @@ const Recipe = () => {
     description,
     imageUrl,
     comensales,
-
     ingredients,
     steps,
     time,
@@ -34,6 +35,7 @@ const Recipe = () => {
   } = recipe;
   const [lastComment, setLastComment] = useState(null);
   const [commentsSize, setCommentsSize] = useState(0);
+  const { user: myUser } = useContext(UserContext);
   const { push } = useHistory();
 
   useEffect(() => {
@@ -65,6 +67,26 @@ const Recipe = () => {
         <ChefHutSpinner />
       ) : (
         <Grid container item xs={12} sm={6} justify="center" className="bg">
+          <Grid
+            container
+            item
+            xs={12}
+            justify="flex-end"
+            alignContent="flex-end"
+            alignItems="flex-end"
+            style={{ margin: '10px 0 10px 0' }}
+          >
+            {user.id === myUser.id && (
+              <>
+                <IconButton
+                  aria-label="add to favorites"
+                  onClick={() => push(`/recipes/edit/${id}`)}
+                >
+                  <EditIcon />
+                </IconButton>
+              </>
+            )}
+          </Grid>
           <RecipeDescription
             imageUrl={imageUrl}
             name={name}

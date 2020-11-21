@@ -1,0 +1,40 @@
+.cardAdd {
+  transition: 0.3s !important;
+  display: flex;
+  flex-direction: column;
+}
+
+.cardAdd .actions {
+  height: 100%;
+  align-items: flex-end;
+  display: flex;
+}
+
+.cardAdd:hover {
+  transform: scale(1.02);
+}
+
+.cardAdd .title {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  padding: 10px 0 10px 0;
+}
+
+.cardAdd .cardAdd-image {
+  margin-left: -25%;
+  display: block;
+  padding: 150px;
+}
+
+.cardAdd .cardAdd-image:hover {
+  cursor: pointer;
+}
+
+.cardAdd .cardAdd-avatar {
+  background-color: red;
+}
+
+.cardAdd .extends:last-child::after {
+  content: '...';
+}

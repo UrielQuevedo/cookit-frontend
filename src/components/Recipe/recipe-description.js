@@ -11,9 +11,6 @@ const RecipeDescription = ({ imageUrl, name, description }) => (
       <Typography variant="h4" className="title-recipe">
         {name}
       </Typography>
-      <Typography variant="subtitle2" className="mb-20 recipe-category">
-        (categoria)
-      </Typography>
     </Grid>
     <Grid item xs={12} className="plr-20">
       <Typography variant="body1" className="recipe-description">

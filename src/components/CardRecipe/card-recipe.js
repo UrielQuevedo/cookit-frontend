@@ -11,7 +11,7 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 import './CardRecipe.css';
 import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { Grid, Grow, Snackbar } from '@material-ui/core';
+import { Button, Grid, Grow, Snackbar } from '@material-ui/core';
 import useTimeAgo from 'hooks/useTimeAgo';
 import { UserContext } from 'context/user-context';
 import { deleteRecipeToFavorite, postAddFavorite } from 'service/user-service';
@@ -24,7 +24,7 @@ import DeleteRecipe from '../Dialog/delete-recipe';
 const TEXT_LIMIT = 150;
 const MESSAGE_FAVORITE_SUCCESSFUL = 'Se agrego correctamente a favoritos';
 
-const CardRecipe = ({ recipe, setRecipes }) => {
+const CardRecipe = ({ recipe, setRecipes, addCategory, openAdd }) => {
   const { imageUrl, description, created_at, name, id, user } = recipe;
   const { push } = useHistory();
   const value = useTimeAgo(new Date(created_at));
@@ -118,11 +118,17 @@ const CardRecipe = ({ recipe, setRecipes }) => {
             )}
             {recipeUserId === myUser.id && (
               <>
-                <IconButton aria-label="add to favorites">
+                <IconButton
+                  aria-label="add to favorites"
+                  onClick={() => push(`/recipes/edit/${id}`)}
+                >
                   <EditIcon />
                 </IconButton>
                 <DeleteRecipe idRecipe={id} setRecipes={setRecipes} />
               </>
+            )}
+            {addCategory && (
+              <Button onClick={() => openAdd(id)}>Seleccionar Categoria</Button>
             )}
           </CardActions>
         </Grid>

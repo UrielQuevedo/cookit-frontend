@@ -4,7 +4,7 @@ import AbstractInput from '../abstract-input';
 import LayoutSection from './layout-section';
 import PropTypes from 'prop-types';
 
-const RecipeInputs = ({ changeField }) => (
+const RecipeInputs = ({ changeField, recipe }) => (
   <LayoutSection>
     <AbstractInput
       onChange={changeField}
@@ -12,7 +12,9 @@ const RecipeInputs = ({ changeField }) => (
       placeholder="ej: Masa de Pizza"
       name="name"
       className="m5"
+      value={recipe.name}
     />
+    {console.log(recipe.name)}
     <AbstractInput
       onChange={changeField}
       type="text"
@@ -22,6 +24,7 @@ const RecipeInputs = ({ changeField }) => (
       multiline
       rows={4}
       rowsMax={6}
+      defaultValue={recipe.description}
     />
     <Grid container className="m5">
       <Grid container item xs={5} alignItems="center">
@@ -33,6 +36,7 @@ const RecipeInputs = ({ changeField }) => (
           type="number"
           name="comensales"
           placeholder="Numero de personas"
+          value={recipe.comensales}
         />
       </Grid>
     </Grid>
@@ -46,6 +50,7 @@ const RecipeInputs = ({ changeField }) => (
           type="number"
           name="time"
           placeholder="Tiempo"
+          value={recipe.time}
         />
       </Grid>
       <Grid
