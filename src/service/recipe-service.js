@@ -18,3 +18,6 @@ export const deleteRecipeById = id => API.remove(`${URL_BASE}/${id}`);
 
 export const getAllFollowersRecipes = id =>
   API.get(`${URL_BASE}/followers/${id}?sort=name&name.dir=desc`);
+
+export const editRecipe = (userId, body) =>
+  API.put(`${URL_BASE}/edit/user/${userId}`, body);

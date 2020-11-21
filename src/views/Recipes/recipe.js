@@ -90,7 +90,6 @@ const Recipe = () => {
             )}
           </Grid>
           <Grid item xs={12}>
-            {console.log(lastComment)}
             {lastComment && <Comment comment={lastComment} />}
             <AddComment
               data-testid="add-comment"

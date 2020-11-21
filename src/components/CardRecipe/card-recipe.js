@@ -118,7 +118,10 @@ const CardRecipe = ({ recipe, setRecipes, addCategory, openAdd }) => {
             )}
             {recipeUserId === myUser.id && (
               <>
-                <IconButton aria-label="add to favorites">
+                <IconButton
+                  aria-label="add to favorites"
+                  onClick={() => push(`/recipes/edit/${id}`)}
+                >
                   <EditIcon />
                 </IconButton>
                 <DeleteRecipe idRecipe={id} setRecipes={setRecipes} />
