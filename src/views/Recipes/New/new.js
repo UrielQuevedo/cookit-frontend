@@ -3,7 +3,7 @@ import { Container, Grid, Button } from '@material-ui/core';
 import './New.css';
 import { postNewRecipe } from 'service/recipe-service';
 import { useHistory } from 'react-router-dom';
-import ImageInput from 'components/NewRecipe/image-input';
+import ImageRecipe from 'components/NewRecipe/image-recipe';
 import RecipeInputs from 'components/NewRecipe/recipe-inputs';
 import IngredientInputs from 'components/NewRecipe/ingredient-inputs';
 import LayoutSection from 'components/NewRecipe/layout-section';
@@ -14,6 +14,7 @@ const PUBLISH_BUTTON_NAME = 'publicar';
 
 const New = () => {
   const [recipe, setRecipe] = useState({});
+  const [image_url, setImageUrl] = useState(recipe.image_url);
   const { push } = useHistory();
   const { user } = useContext(UserContext);
   const [ingredients, setIngredients] = useState([
@@ -38,6 +39,7 @@ const New = () => {
     event.preventDefault();
     postNewRecipe({
       ...recipe,
+      image_url: image_url,
       userId: user.id,
       ingredients,
       steps: stepsRecipes
@@ -51,7 +53,7 @@ const New = () => {
     <Container>
       <form onSubmit={handleSubmit}>
         <Grid container justify="center" alignItems="center" direction="column">
-          <ImageInput recipe={recipe} changeField={changeField} />
+          <ImageRecipe recipe={recipe} setImageUrl={setImageUrl} />
           <RecipeInputs changeField={changeField} />
           <IngredientInputs
             ingredients={ingredients}
