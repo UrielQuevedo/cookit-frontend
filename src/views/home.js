@@ -70,7 +70,7 @@ const Home = () => {
             onChange={(event, value) => setTabSelected(value)}
           >
             <Tab label="recientes" value={0} />
-            <Tab label="seguidores" value={1} />
+            <Tab label="seguidos" value={1} />
           </Tabs>
         </Paper>
       </Grid>
