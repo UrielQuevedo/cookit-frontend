@@ -30,7 +30,14 @@ const AvatarImageSelect = ({ imageUrl, name, lastname, handleChangeUserValue }) 
     <>
       {_imageUrl ? (
         <div style={{ textAlign: 'center' }}>
-          <input id='openStorage' type='file' name='filename' hidden onChange={readFile}/>
+          <input 
+          accept="image/*"
+          id='openStorage' 
+          type='file' 
+          name='filename'
+          hidden 
+          onChange={readFile}
+          />
           <button type="button" onClick={openDialog} style={{ border: 'none', background: '#FD5252' }}>
             <img
               id='imageUser'
@@ -45,7 +52,13 @@ const AvatarImageSelect = ({ imageUrl, name, lastname, handleChangeUserValue }) 
         </div>
       ) : (
         <div style={{ textAlign: 'center' }}>
-          <input id='openStorage' type='file' name='filename' hidden onChange={readFile}/>
+          <input 
+          accept="image/*"
+          id='openStorage' 
+          type='file' 
+          name='filename' 
+          hidden 
+          onChange={readFile}/>
           <button type="button" onClick={openDialog} style={{ border: 'none', background: '#FD5252' }}>
               <Avatar
               aria-label="recipe"
