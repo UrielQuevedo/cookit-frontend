@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import {
   Paper,
   Grid,
@@ -10,6 +10,7 @@ import {
 } from '@material-ui/core';
 import useTimeAgo from 'hooks/useTimeAgo';
 import AvatarImage from 'components/User/avatar-image';
+import { UserContext } from 'context/user-context';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -25,7 +26,8 @@ const useStyles = makeStyles(theme => ({
 
 const Comment = ({ comment }) => {
   const { message, created_at, owner } = comment;
-  const { imageUrl, name, lastname } = owner;
+  const { imageUrl, name, lastname, idUser } = owner;
+  const { user } = useContext(UserContext);
   const time = useTimeAgo(new Date(created_at));
   const classes = useStyles();
 
@@ -35,11 +37,18 @@ const Comment = ({ comment }) => {
         <Paper className={classes.paper}>
           <Grid container wrap="nowrap" spacing={2}>
             <Grid item>
-              <AvatarImage name={name} lastname={lastname} imageUrl={imageUrl} />
+              <AvatarImage
+                name={name}
+                lastname={lastname}
+                imageUrl={imageUrl}
+              />
             </Grid>
             <Grid item xs>
               <Typography style={{ fontWeight: 'bold' }}>
                 {name} {lastname}
+                <Typography variant="caption" style={{ marginLeft: '5px' }}>
+                  {idUser === user.id && '(Tú)'}
+                </Typography>
               </Typography>
               <Typography style={{ color: 'grey', marginBottom: '5px' }}>
                 {time}
