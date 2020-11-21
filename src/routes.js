@@ -3,6 +3,7 @@ import New from 'views/Recipes/New/new';
 import Recipe from 'views/Recipes/recipe';
 import Search from 'views/Recipes/Search/search';
 import User from 'views/user';
+import EditUser from 'views/EditUser/edit-user';
 import CommentList from 'views/Recipes/CommentList/comment-list';
 import FavoritesPage from 'views/Favorites/favorites-pages';
 import CategoryFavoritesPage from 'views/CategoryFavorites/category-favorites-page';
@@ -19,7 +20,8 @@ const routes = [
     path: '/favorites/category/:idCategory',
     exact: true,
     component: CategoryFavoritesPage
-  }
+  },
+  { path: '/profile/edit', exact: true, component: EditUser }
 ];
 
 export default routes;

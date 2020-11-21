@@ -9,7 +9,9 @@ const UserProvider = ({ children }) => {
 
   useEffect(() => {
     setLoading(true);
-    me().then(response => setUser(response));
+    me()
+    .then(response => setUser(response))
+    .catch(error => console.log(error));
     setLoading(false);
   }, []);
 

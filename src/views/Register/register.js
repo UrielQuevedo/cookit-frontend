@@ -34,8 +34,12 @@ const Register = () => {
         lastname: data.lastname,
         password: data.password
       };
-      const response = await registerRequest(sendData);
-      checkStatusAndRedirect(response);
+      try {
+        const _ = await registerRequest(sendData);
+        push('/login');
+      } catch (error) {
+        setError(error.message);
+      }
       setLoading(false);
     } else {
       setError('Las contraseñas no coinciden');
